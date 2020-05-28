@@ -10,12 +10,16 @@
 </template>
 
 <style>
+
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  box-sizing: border-box;
 }
 
 #nav {
@@ -56,14 +60,14 @@ button{
   cursor: pointer;
   font-size: 1.4rem;
 }
-h1, h2 {
+/* h1, h2 {
   font-weight: normal;
-}
-ul.results {
+} */
+/* ul.results {
   list-style-type: none;
   padding: 0;
-}
-.results li {
+} */
+/* .results li {
   display: inline-block;
   margin: 10px;
   border: solid 1px #333;
@@ -72,7 +76,7 @@ ul.results {
   min-height: 100px;
   color: #fff;
   background: rgba(0,0,0,0.7);
-}
+} */
 ul.errors {
   list-style-type: none;
 }

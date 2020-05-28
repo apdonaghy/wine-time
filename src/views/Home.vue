@@ -38,13 +38,21 @@
     <div v-if="results && results.length > 0" class="results">
       <ul v-for="item of results" class="item" :key="item.id">
         <li v-if="item.description != null">
-          <p>
+           <h2>
             <strong>{{item.title}}</strong>
-          </p>
-          <img :src="item.imageUrl" :alt="item.title" />
-          <p>{{item.price}}</p>
-          <p>{{ Math.floor(item.averageRating * 100) }}%</p>
-          <p>{{item.description}}</p>
+          </h2>
+           <div class="flex-container">
+         
+         
+            <div class="twentyFive">
+              <img class="img" :src="item.imageUrl" :alt="item.title" />
+            </div>
+            <div class="seventyFive">
+              <p>{{item.price}}</p>
+              <p>{{ Math.floor(item.averageRating * 100) }}%</p>
+              <p>{{item.description}}</p>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -108,3 +116,37 @@ export default {
 };
 </script>
 
+<style scoped>
+.img {
+  display: block;
+  max-width:100%;
+  max-height:17em;
+  margin:0 auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container > div {
+  /* background-color: #f1f1f1; */
+  
+  /* text-align: center;
+  line-height: 75px;
+  font-size: 30px; */
+  margin: 5px;
+}
+
+.twentyFive {
+  width: calc(25% - 10px);
+}
+
+.seventyFive {
+  width: calc(75% - 10px);
+}
+</style>
