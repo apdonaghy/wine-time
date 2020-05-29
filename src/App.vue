@@ -36,7 +36,7 @@ nav{
 .flex-containerNav {
   display: flex;
   flex-wrap: nowrap;
-   justify-content: center;
+  justify-content: center;
   align-items: center;
 }
 
