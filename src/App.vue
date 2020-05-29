@@ -1,45 +1,79 @@
 <template>
   <div id="app">
-    <!-- <h1>Wine Searcher</h1> -->
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/adjective">Adjectives</router-link>
-    </div>
+    <nav class="flex-containerNav">
+    <h1 class="ninety"><router-link to="/"><img class="logo" src="./assets/wineTime.svg"></router-link></h1>
+     <router-link to="/About" class="ten about">About</router-link>
+     </nav>
+
     <router-view/>
   </div>
 </template>
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap');
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+*{
   box-sizing: border-box;
+  margin:0;
+  padding:0;
 }
 
-#nav {
+.logo{
+  width:30%;
+  padding:15px 0 15px 15px;
+  display:inline-block;
+}
+
+
+nav{
+  background-color: #f3f3f3;
+}
+
+
+.flex-containerNav {
+  display: flex;
+  flex-wrap: nowrap;
+   justify-content: center;
+  align-items: center;
+}
+
+
+.ninety {
+  width: calc(90%);
+}
+
+.ten {
+  width: calc(10%);
+}
+
+.about{
+   font-family: 'Abhaya Libre', serif;
+   text-decoration: none;
+   font-size:1.35em;
+   color:#94154b;
+}
+
+/* #nav {
   padding: 30px;
-}
+} */
 
-#nav a {
+/* #nav a {
   font-weight: bold;
   color: #2c3e50;
-}
+} */
 
-#nav a.router-link-exact-active {
+/* #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 
 
-.rhymesaurus {
+/* .rhymesaurus {
   font-size: 1.4rem;
-}
-input[type="text"]{
+} */
+/* input[type="text"]{
   border-top: none;
   border-left: none;
   border-right: none;
@@ -50,8 +84,8 @@ input[type="text"]{
   font-weight: 300;
   background: rgba(0,0,0,0.02);
   padding: 0.5rem;
-}
-button{
+} */
+/* button{
   background: #333;
   padding: 0.5rem;
   font-weight: 300;
@@ -59,7 +93,7 @@ button{
   border: none;
   cursor: pointer;
   font-size: 1.4rem;
-}
+} */
 /* h1, h2 {
   font-weight: normal;
 } */
@@ -77,7 +111,7 @@ button{
   color: #fff;
   background: rgba(0,0,0,0.7);
 } */
-ul.errors {
+/* ul.errors {
   list-style-type: none;
 }
 .errors li {
@@ -88,6 +122,6 @@ ul.errors {
 }
 a {
   color: #42b983;
-}
+} */
 </style>
 

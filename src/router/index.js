@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
-import Adjective from '@/views/Adjective'
+import About from '@/views/About'
 
 
 Vue.use(VueRouter)
@@ -13,9 +13,9 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/adjective',
-    name: 'adjective',
-    component: Adjective
+    path: '/About',
+    name: 'About',
+    component: About
   }
 
 ]
