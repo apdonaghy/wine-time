@@ -133,6 +133,15 @@ export default {
         });
     }
   }
+  // computed:{
+  //      priceSort: function(arr) {
+  //     return arr.slice().sort(function(a, b) {
+  //       return b.price - a.price;
+  //     });
+  //   }
+  
+  // }
+  
 };
 </script>
 
