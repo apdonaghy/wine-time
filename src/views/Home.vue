@@ -41,7 +41,7 @@
           <label for="max-price" class="form-labels">MAX PRICE <strong class="fiveHundred">$</strong></label>
           <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
         </div>
-        <button type="submit" class="form-labels"><i class="fas fa-search"></i>SEARCH</button>
+        <button type="submit" class="form-labels"><span class="search-icon"><font-awesome-icon icon="search" /></span><span class="searchWord">SEARCH</span></button>
       </div>
 
     </form>
@@ -322,6 +322,8 @@ input[type=text]{
 button{
   background-color:transparent;
   border: 4px #94154b solid;
+  height:1.7em;
+  margin-left:1.5em;
 }
 
 .search{
@@ -332,7 +334,15 @@ button{
   display:inline;
 }
 
+.search-icon{
+  color:white;
+  background-color: #94154b;
+  padding: 8px;
+}
 
+.searchWord{
+  padding:0 12px 0 10px;
+}
 
 /* form */
 </style>
