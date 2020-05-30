@@ -12,7 +12,7 @@
             <option value="merlot">Merlot</option>
             <option value="pinot noir">Pinot Noir</option>
             <option value="bordeaux">Bordeaux</option>
-            <option value="syrah">syrah</option>
+            <option value="syrah">Syrah</option>
             <option value="malbec">Malbec</option>
             <option value="zinfandel">Zinfandel</option>
           </select>
@@ -41,7 +41,7 @@
           <label for="max-price" class="form-labels">MAX PRICE <strong class="fiveHundred">$</strong></label>
           <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
         </div>
-        <button type="submit" class="form-labels"><img src=""/>SEARCH</button>
+        <button type="submit" class="form-labels"><i class="fas fa-search"></i>SEARCH</button>
       </div>
 
     </form>
@@ -139,13 +139,13 @@ export default {
 <style scoped>
 .wines-container {
   background-color: #f3f3f3;
-  padding: 15px 30px 0px 30px;
-  min-height: 10em;
+  padding: 0px 30px 0px 30px;
 }
 
 .wine-container {
   background-color: white;
   padding: 20px 40px 20px 0px;
+  margin-top:15px;
   margin-bottom: 30px;
   box-shadow: 0px 0px 5px lightgrey;
 }
@@ -250,7 +250,11 @@ h2 {
   color: #94154b;
   line-height: 1.3;
   padding: 0.6em 1.4em 0.5em 0em;
-  background-color: white;
+  background-color: transparent;
+	background-image: url('../assets/arrow.svg');
+	background-repeat: no-repeat, repeat;
+  background-size: .65em auto, 100%;
+	background-position: right 0em top 50%, 0 0;
   margin: 0;
   border: none;
   border-radius:0;
@@ -295,19 +299,24 @@ form{
 
 
 input[type=text]{
-
     border:none;
-     border-bottom: 4px #94154b solid;
+    border-bottom: 4px #94154b solid;
     background-image:none;
     background-color:transparent;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     font-family: "Open Sans", sans-serif;
+    font-weight:500;
+    color:#94154b;
+    font-size:3.5em;
+    width:1.75em;
+}
+
+
+
+.fiveHundred{
   font-weight:500;
-  color:#94154b;
-  font-size:3.5em;
-width:1.75em;
 }
 
 button{
@@ -315,9 +324,15 @@ button{
   border: 4px #94154b solid;
 }
 
-.fiveHundred{
-  font-weight:500;
+.search{
+  display:inline;
+  max-height:40px;
 }
+.searchWord{
+  display:inline;
+}
+
+
 
 /* form */
 </style>
