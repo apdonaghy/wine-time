@@ -41,7 +41,7 @@
           <label for="max-price" class="form-labels">MAX PRICE <strong class="fiveHundred">$</strong></label>
           <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
         </div>
-        <button type="submit" class="form-labels"><span class="search-icon"><font-awesome-icon icon="search" /></span><span class="searchWord">SEARCH</span></button>
+        <button @click="googleClick" type="submit" class="form-labels"><span class="search-icon"><font-awesome-icon icon="search" /></span><span class="searchWord">SEARCH</span></button>
       </div>
 
     </form>
@@ -131,6 +131,14 @@ export default {
         .catch(error => {
           this.errors.push(error);
         });
+    },
+    googleClick(){
+      this.$ga.event({
+        eventCategory:'mainApp',
+        eventAction:'click',
+        eventLabel:'wine_click',
+        eventValue: 1
+      })
     }
   }
   // computed:{
