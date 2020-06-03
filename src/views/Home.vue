@@ -1,6 +1,10 @@
 <template>
   <div class="Home">
+    
     <form v-on:submit.prevent="findWine">
+      
+      <p class="ab-test">Select a wine and your max-price then search <br/>to see a list of recommended wines</p>
+
       <div class="flex-container margin-bottom">
         <div>
           <label for="redWine" class="form-labels">
@@ -360,6 +364,18 @@ button{
 .searchWord{
   padding:0 12px 0 10px;
 }
+
+.ab-test{
+  text-align:center;
+  /* color:transparent; */
+  font-weight: 100;
+  font-size:1.92em;
+  padding: 80px 0px 90px 0;
+  color:#94154b;
+  font-family: "Abhaya Libre", serif;
+
+}
+
 
 /* form */
 </style>
