@@ -52,9 +52,7 @@
 <div class="rule"></div>
     <main class="wines-container">
       <ul v-if="results && results.length > 0">
-        <li v-for="item of results" class="wine-container" :key="item.id">
-          <!-- <div v-if="item.description != null && item.ratingCount > 7"> -->
-
+        <li v-for="item of results" class="wine-container" :key="item.id">          
           <div class="flex-container">
             <div class="twentyFive">
               <img class="img" :src="item.imageUrl" :alt="item.title" />
@@ -144,16 +142,13 @@ export default {
         eventValue: 1
       })
     }
+  //   ,
+  //   priceSort: function(arr) {
+  //   return arr.sort(function(a, b) {
+  //   return b.this.price - a.this.price;
+  //   });
+  //  }
   }
-  // computed:{
-  //      priceSort: function(arr) {
-  //     return arr.slice().sort(function(a, b) {
-  //       return b.price - a.price;
-  //     });
-  //   }
-  
-  // }
-  
 };
 </script>
 
