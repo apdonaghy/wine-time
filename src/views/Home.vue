@@ -416,6 +416,7 @@ button{
   .select-css {
   display: block;
   font-size: 1.7em;
+  margin: 0 auto;
   }
   h2{
   font-size:2.25em;
@@ -427,6 +428,10 @@ button{
 .seventyFive {
   width: calc(90%);
 }
+  .flex-container{
+    text-align:center;
+  }
+
 }
 
 @media screen and (max-width: 400px){
@@ -445,6 +450,11 @@ button{
 .search-icon{
   padding: 7px;
 }
+
+  .select-css {
+  display: block;
+  font-size: 1.4em;
+  }
 
 
 }
