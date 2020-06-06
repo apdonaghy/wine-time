@@ -49,6 +49,25 @@ nav{
   width: calc(10%);
 }
 
+
+@media screen and (max-width: 650px){
+.ninety {
+  width: calc(80%);
+}
+
+.ten {
+  width: calc(20%);
+}
+
+.logo{
+  width:50%;
+  padding:15px 0 15px 15px;
+  display:inline-block;
+}
+
+}
+
+
 .about{
    font-family: 'Abhaya Libre', serif;
    text-decoration: none;

@@ -373,4 +373,82 @@ button{
 
 
 /* form */
+
+
+@media screen and (max-width: 1100px){
+  .flex-container{
+    flex-wrap:wrap;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+.flex-container3 {
+  flex-wrap:wrap;
+   justify-content: center;
+    margin-bottom: 50px;
+ 
+}
+button{
+  margin-top:40px;
+  background-color:transparent;
+  border: 4px #94154b solid;
+  height:1.7em;
+  margin-left:0;
+}
+
+.wine-container {
+  padding: 20px 0px 20px 0px;
+}
+
+.img {
+  display: block;
+  max-width: 100%;
+  max-height: 50em;
+  margin: 0 auto;
+}
+
+.twentyFive {
+  width: calc(100% - 10px);
+}
+
+}
+
+@media screen and (max-width: 650px){
+  .select-css {
+  display: block;
+  font-size: 1.7em;
+  }
+  h2{
+  font-size:2.25em;
+}
+
+.price{
+  font-size:1.75em;
+}
+.seventyFive {
+  width: calc(90%);
+}
+}
+
+@media screen and (max-width: 400px){
+  p{
+    font-size:1em;
+  }
+  .flex-container{
+    margin-bottom:0px;
+  }
+.form-labels{
+
+  font-size:2.75em;
+
+}
+
+.search-icon{
+  padding: 7px;
+}
+
+
+}
+
+
+
 </style>
