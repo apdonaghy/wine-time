@@ -1,9 +1,9 @@
 <template>
   <div class="Home">
-    
     <form v-on:submit.prevent="findWine">
-      
-      <p class="ab-test">Select a wine and your max-price then search to see a list of recommended wines</p>
+      <p
+        class="ab-test"
+      >Select a wine and your max-price then search to see a list of recommended wines</p>
 
       <div class="flex-container margin-bottom">
         <div>
@@ -42,17 +42,31 @@
 
       <div class="flex-container3 margin-bottom">
         <div>
-          <label for="max-price" class="form-labels">MAX PRICE <strong class="fiveHundred">$</strong></label>
+          <label for="max-price" class="form-labels">
+            MAX PRICE
+            <strong class="fiveHundred">$</strong>
+          </label>
           <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
         </div>
-        <button @click="googleClick" type="submit" class="form-labels"><span class="search-icon"><font-awesome-icon icon="search" /></span><span class="searchWord">SEARCH</span></button>
+        <button @click="googleClick" type="submit" class="form-labels">
+          <span class="search-icon">
+            <font-awesome-icon icon="search" />
+          </span>
+          <span class="searchWord">SEARCH</span>
+        </button>
       </div>
-
     </form>
-<div class="rule"></div>
+
+    <div class="rule"></div>
     <main class="wines-container">
       <ul v-if="results && results.length > 0">
-        <li v-for="item of results" class="wine-container" :key="item.id">          
+        <p class="filter-text">FILTER</p>
+        <button class="filter-btn" @click="high">$ high to low</button>
+        <button class="filter-btn" @click="low">$ low to high</button>
+        <button class="filter-btn" @click="check">Check Array</button>
+
+
+        <li v-for="item of results" class="wine-container" :key="item.id">
           <div class="flex-container">
             <div class="twentyFive">
               <img class="img" :src="item.imageUrl" :alt="item.title" />
@@ -74,22 +88,12 @@
               <p>{{item.description}}</p>
             </div>
           </div>
-          <!-- </div> -->
         </li>
       </ul>
 
-      <!-- <ul v-if="results && results.length > 0" class="results">
-      <li v-for="item of results" class="item" :key="item">
-        <div v-if="item.description != '' && item.ratingCount > 8">
-          <p>
-            <strong>{{item.title}}</strong>
-          </p>
-          <p>{{item.price}}</p>
-          <p>{{ Math.floor(item.averageRating * 100) }}%</p>
-          <p>{{item.description}}</p>
-        </div>
-      </li>
-      </ul>-->
+
+        <!-- <div v-if="item.description != '' && item.ratingCount > 8"> -->
+
 
       <div v-else-if="results && results.length==0" class="no-results">
         <h2>No Wines Found</h2>
@@ -134,20 +138,27 @@ export default {
           this.errors.push(error);
         });
     },
-    googleClick(){
+    googleClick() {
       this.$ga.event({
-        eventCategory:'mainApp',
-        eventAction:'click',
-        eventLabel:'wine_click',
+        eventCategory: "mainApp",
+        eventAction: "click",
+        eventLabel: "wine_click",
         eventValue: 1
-      })
+      });
+    },
+    high() {
+      return this.results.sort(function(a, b) {
+        return b.price - a.price;
+      });
+    },
+      low() {
+      return this.results.sort(function(a, b) {
+      return a.price - b.price;
+      });
+    },
+    check() {
+    console.log(this.results);
     }
-  //   ,
-  //   priceSort: function(arr) {
-  //   return arr.sort(function(a, b) {
-  //   return b.this.price - a.this.price;
-  //   });
-  //  }
   }
 };
 </script>
@@ -161,7 +172,7 @@ export default {
 .wine-container {
   background-color: white;
   padding: 20px 40px 20px 0px;
-  margin-top:15px;
+  margin-top: 15px;
   margin-bottom: 30px;
   box-shadow: 0px 0px 5px lightgrey;
 }
@@ -180,9 +191,9 @@ ul {
   margin: 0 auto;
 }
 
-.rule{
-  height:1.15em;
-  background-color:#94154b;
+.rule {
+  height: 1.15em;
+  background-color: #94154b;
 }
 
 p {
@@ -230,16 +241,15 @@ p {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
- 
 }
 
 .flex-container3 {
   display: flex;
   flex-wrap: nowrap;
- 
 }
 
-.flex-container > div, .flex-container3 > div {
+.flex-container > div,
+.flex-container3 > div {
   margin: 15px;
 }
 
@@ -257,7 +267,11 @@ h2 {
   font-weight: 900;
 }
 
+
+
+
 /* form */
+
 .select-css {
   display: block;
   font-size: 2.15em;
@@ -267,17 +281,17 @@ h2 {
   line-height: 1.3;
   padding: 0.6em 1.4em 0.5em 0em;
   background-color: transparent;
-	background-image: url('../assets/arrow.svg');
-	background-repeat: no-repeat, repeat;
-  background-size: .65em auto, 100%;
-	background-position: right 0em top 50%, 0 0;
+  background-image: url("../assets/arrow.svg");
+  background-repeat: no-repeat, repeat;
+  background-size: 0.65em auto, 100%;
+  background-position: right 0em top 50%, 0 0;
   margin: 0;
   border: none;
-  border-radius:0;
+  border-radius: 0;
   border-bottom: 4px #94154b solid;
   -moz-appearance: none;
   -webkit-appearance: none;
-  appearance: none; 
+  appearance: none;
 }
 .select-css::-ms-expand {
   color: #94154b;
@@ -289,180 +303,204 @@ h2 {
   border-color: #aaa;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
   box-shadow: 0 0 0 3px -moz-mac-focusring;
-  color:#94154b;
+  color: #94154b;
   outline: none;
 }
 .select-css option {
   font-weight: normal;
 }
 
-
-
-.form-labels{
+.form-labels {
   font-family: "Open Sans", sans-serif;
-  font-weight:100;
-  color:#94154b;
-  font-size:3.5em;
+  font-weight: 100;
+  color: #94154b;
+  font-size: 3.5em;
 }
 
-form{
-  padding:30px;
+form {
+  padding: 30px;
 }
 
-.margin-bottom{
-  margin-bottom:40px;
+.margin-bottom {
+  margin-bottom: 40px;
 }
 
-
-input[type=text]{
-    border:none;
-    border-bottom: 4px #94154b solid;
-    background-image:none;
-    background-color:transparent;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    font-family: "Open Sans", sans-serif;
-    font-weight:500;
-    color:#94154b;
-    font-size:3.5em;
-    width:1.75em;
+input[type="text"] {
+  border: none;
+  border-bottom: 4px #94154b solid;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  color: #94154b;
+  font-size: 3.5em;
+  width: 1.75em;
 }
 
-
-
-.fiveHundred{
-  font-weight:500;
+.fiveHundred {
+  font-weight: 500;
 }
 
-button{
-  background-color:transparent;
+button {
+  background-color: transparent;
   border: 4px #94154b solid;
-  height:1.7em;
-  margin-left:1.5em;
+  height: 1.7em;
+  margin-left: 1.5em;
+  cursor:pointer;
 }
 
-.search{
-  display:inline;
-  max-height:40px;
+.search {
+  display: inline;
+  max-height: 40px;
 }
-.searchWord{
-  display:inline;
+.searchWord {
+  display: inline;
 }
 
-.search-icon{
-  color:white;
+.search-icon {
+  color: white;
   background-color: #94154b;
   padding: 8px;
 }
 
-.searchWord{
-  padding:0 12px 0 10px;
+.searchWord {
+  padding: 0 12px 0 10px;
 }
 
-.ab-test{
-  text-align:center;
-  /* color:transparent; */
+.ab-test {
+  text-align: center;
   font-weight: 100;
-  font-size:1.92em;
+  font-size: 1.92em;
   padding: 80px 0px 90px 0;
-  color:#94154b;
+  color: #94154b;
   font-family: "Abhaya Libre", serif;
-  max-width:20em;
+  max-width: 20em;
   display: block;
-  margin:0 auto;
-
+  margin: 0 auto;
 }
-
 
 /* form */
 
 
-@media screen and (max-width: 1100px){
-  .flex-container{
-    flex-wrap:wrap;
+.filter-btn{
+  background-color:#dedada;
+  border-radius:15px;
+  border:none;
+  padding:10px;
+  height: auto;
+  margin-left: 0px;
+  margin-right:15px;
+  font-weight:400;
+  color:#6a6a6a;
+  font-size:.9em;
+}
+
+.filter-text{
+  display:inline-block;
+  margin-right:15px;
+}
+
+/* responsive styles */
+
+@media screen and (max-width: 1100px) {
+  .flex-container {
+    flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 50px;
   }
-.flex-container3 {
-  flex-wrap:wrap;
-   justify-content: center;
+  .flex-container3 {
+    flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 50px;
- 
-}
-button{
-  margin-top:40px;
-  background-color:transparent;
-  border: 4px #94154b solid;
-  height:1.7em;
-  margin-left:0;
-}
-
-.wine-container {
-  padding: 20px 0px 20px 0px;
-}
-
-.img {
-  display: block;
-  max-width: 100%;
-  max-height: 50em;
-  margin: 0 auto;
-}
-
-.twentyFive {
-  width: calc(100% - 10px);
-}
-
-}
-
-@media screen and (max-width: 650px){
-  .select-css {
-  display: block;
-  font-size: 1.7em;
-  margin: 0 auto;
   }
-  h2{
-  font-size:2.25em;
-}
+  button {
+    margin-top: 10px;
+    background-color: transparent;
+    border: 4px #94154b solid;
+    height: 1.7em;
+    margin-left: 0;
+  }
 
-.price{
-  font-size:1.75em;
-}
-.seventyFive {
-  width: calc(90%);
-}
-  .wines-container.flex-container{
+  .wine-container {
+    padding: 20px 0px 20px 0px;
+  }
 
-    text-align:left;
+  .img {
+    display: block;
+    max-width: 100%;
+    max-height: 50em;
+    margin: 0 auto;
+  }
+
+  .twentyFive {
+    width: calc(100% - 10px);
+  }
+  .inside-rating {
+    background-color: #94154b;
+    padding: 6px;
+    color: white;
+  }
+  .filter-text{
+    display:block;
   }
 
 }
 
-@media screen and (max-width: 400px){
-  p{
-    font-size:1em;
-  }
-  .flex-container{
-    margin-bottom:0px;
-  }
-.form-labels{
+@media screen and (max-width: 650px) {
 
-  font-size:2.75em;
-
+  .filter-btn{
+  font-size:.75em;
 }
 
-.search-icon{
-  padding: 7px;
-}
 
   .select-css {
-  display: block;
-  font-size: 1.4em;
+    display: block;
+    font-size: 1.7em;
+    margin: 0 auto;
+  }
+  h2 {
+    font-size: 2.25em;
   }
 
-
+  .price {
+    font-size: 1.75em;
+  }
+  .seventyFive {
+    width: calc(90%);
+  }
+  .wines-container.flex-container {
+    text-align: left;
+  }
+    .flex-container {
+    margin-bottom: 0px;
+  }
 }
 
+@media screen and (max-width: 400px) {
+    .filter-btn{
+  font-size:.6em;
+  margin-right:5px;
+}
+  p {
+    font-size: 1em;
+  }
+  .flex-container {
+    margin-bottom: 0px;
+  }
+  .form-labels {
+    font-size: 2.75em;
+  }
 
+  .search-icon {
+    padding: 7px;
+  }
 
+  .select-css {
+    display: block;
+    font-size: 1.4em;
+  }
+}
 </style>
