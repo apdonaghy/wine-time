@@ -3,7 +3,7 @@
     
     <form v-on:submit.prevent="findWine">
       
-      <p class="ab-test">Select a wine and your max-price then search <br/>to see a list of recommended wines</p>
+      <p class="ab-test">Select a wine and your max-price then search to see a list of recommended wines</p>
 
       <div class="flex-container margin-bottom">
         <div>
@@ -368,6 +368,9 @@ button{
   padding: 80px 0px 90px 0;
   color:#94154b;
   font-family: "Abhaya Libre", serif;
+  max-width:20em;
+  display: block;
+  margin:0 auto;
 
 }
 
@@ -428,8 +431,9 @@ button{
 .seventyFive {
   width: calc(90%);
 }
-  .flex-container{
-    text-align:center;
+  .wines-container.flex-container{
+
+    text-align:left;
   }
 
 }
