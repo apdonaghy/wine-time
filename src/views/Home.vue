@@ -1,9 +1,7 @@
 <template>
   <div class="Home">
     <form v-on:submit.prevent="findWine">
-      <p
-        class="ab-test"
-      >Select a wine and your max-price then search to see a list of recommended wines</p>
+      <p class="ab-test">Select a wine and your max-price then search to see a list of recommended wines</p>
 
       <div class="flex-container margin-bottom">
         <div>
@@ -63,8 +61,8 @@
         <p class="filter-text">FILTER</p>
         <button class="filter-btn" @click="high">$ high to low</button>
         <button class="filter-btn" @click="low">$ low to high</button>
-        <button class="filter-btn" @click="check">Check Array</button>
-
+        <button class="filter-btn" @click="highestRatings">Highest Rated</button>
+        <button class="filter-btn" @click="mostRatings">Rating Count</button>
 
         <li v-for="item of results" class="wine-container" :key="item.id">
           <div class="flex-container">
@@ -75,7 +73,7 @@
               <h2>
                 <strong>{{item.title}}</strong>
               </h2>
-              <span class="price">{{item.price}}</span>
+              <span class="price">${{item.price}}</span>
               <span class="rating">
                 Rating
                 <span class="inside-rating">{{ Math.floor(item.averageRating * 100) }}%</span>
@@ -91,9 +89,7 @@
         </li>
       </ul>
 
-
-        <!-- <div v-if="item.description != '' && item.ratingCount > 8"> -->
-
+      <!-- <div v-if="item.description != '' && item.ratingCount > 8"> -->
 
       <div v-else-if="results && results.length==0" class="no-results">
         <h2>No Wines Found</h2>
@@ -132,7 +128,7 @@ export default {
           }
         })
         .then(response => {
-          this.results = response.data.recommendedWines;
+          this.results = this.processData(response.data.recommendedWines);
         })
         .catch(error => {
           this.errors.push(error);
@@ -151,13 +147,26 @@ export default {
         return b.price - a.price;
       });
     },
-      low() {
+    low() {
       return this.results.sort(function(a, b) {
-      return a.price - b.price;
+        return a.price - b.price;
       });
     },
-    check() {
-    console.log(this.results);
+    highestRatings() {
+      return this.results.sort(function(a, b) {
+        return b.averageRating - a.averageRating;
+      });
+    },
+    mostRatings() {
+      return this.results.sort(function(a, b) {
+        return b.ratingCount - a.ratingCount;
+      });
+    },
+    processData: function(dataArr) {
+      for (let data in dataArr) {
+        dataArr[data].price = parseFloat(dataArr[data].price.substring(1));
+      }
+      return dataArr;
     }
   }
 };
@@ -267,9 +276,6 @@ h2 {
   font-weight: 900;
 }
 
-
-
-
 /* form */
 
 .select-css {
@@ -349,7 +355,7 @@ button {
   border: 4px #94154b solid;
   height: 1.7em;
   margin-left: 1.5em;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .search {
@@ -384,23 +390,22 @@ button {
 
 /* form */
 
-
-.filter-btn{
-  background-color:#dedada;
-  border-radius:15px;
-  border:none;
-  padding:10px;
+.filter-btn {
+  background-color: #dedada;
+  border-radius: 15px;
+  border: none;
+  padding: 10px;
   height: auto;
   margin-left: 0px;
-  margin-right:15px;
-  font-weight:400;
-  color:#6a6a6a;
-  font-size:.9em;
+  margin-right: 15px;
+  font-weight: 400;
+  color: #6a6a6a;
+  font-size: 0.9em;
 }
 
-.filter-text{
-  display:inline-block;
-  margin-right:15px;
+.filter-text {
+  display: inline-block;
+  margin-right: 15px;
 }
 
 /* responsive styles */
@@ -443,18 +448,15 @@ button {
     padding: 6px;
     color: white;
   }
-  .filter-text{
-    display:block;
+  .filter-text {
+    display: block;
   }
-
 }
 
 @media screen and (max-width: 650px) {
-
-  .filter-btn{
-  font-size:.75em;
-}
-
+  .filter-btn {
+    font-size: 0.75em;
+  }
 
   .select-css {
     display: block;
@@ -474,16 +476,16 @@ button {
   .wines-container.flex-container {
     text-align: left;
   }
-    .flex-container {
+  .flex-container {
     margin-bottom: 0px;
   }
 }
 
 @media screen and (max-width: 400px) {
-    .filter-btn{
-  font-size:.6em;
-  margin-right:5px;
-}
+  .filter-btn {
+    font-size: 0.6em;
+    margin-right: 5px;
+  }
   p {
     font-size: 1em;
   }
