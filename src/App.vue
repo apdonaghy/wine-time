@@ -1,10 +1,11 @@
 <template>
   <div id="app">
+    <div class="grey">
     <nav class="flex-containerNav">
     <h1 class="ninety"><router-link to="/"><img class="logo" src="./assets/wineTime.svg"></router-link></h1>
      <router-link to="/About" class="ten about">About</router-link>
      </nav>
-
+    </div>
     <router-view/>
   </div>
 </template>
@@ -28,7 +29,7 @@
 }
 
 
-nav{
+.grey{
   background-color: #f3f3f3;
 }
 
@@ -38,6 +39,8 @@ nav{
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  max-width:1460px;
+  margin:0 auto;
 }
 
 

@@ -1,6 +1,6 @@
 <template>
   <div class="Home">
-    <form v-on:submit.prevent="findWine">
+    <form v-on:submit.prevent="findWine" class="container">
       <p class="ab-test">Select a wine and your max-price then search to see a list of recommended wines</p>
 
       <div class="flex-container margin-bottom">
@@ -54,17 +54,17 @@
         </button>
       </div>
     </form>
-
-    <div class="rule"></div>
+        <div v-if="results && results.length > 0" class="rule"></div>
     <main class="wines-container">
       <ul v-if="results && results.length > 0">
+        <div class="container">
         <p class="filter-text">FILTER</p>
         <button class="filter-btn" @click="high">$ high to low</button>
         <button class="filter-btn" @click="low">$ low to high</button>
         <button class="filter-btn" @click="highestRatings">Highest Rated</button>
         <button class="filter-btn" @click="mostRatings">Rating Count</button>
-
-        <li v-for="item of results" class="wine-container" :key="item.id">
+        </div>
+        <li v-for="item of results" class="wine-container container" :key="item.id">
           <div class="flex-container">
             <div class="twentyFive">
               <img class="img" :src="item.imageUrl" :alt="item.title" />
@@ -73,7 +73,7 @@
               <h2>
                 <strong>{{item.title}}</strong>
               </h2>
-              <span class="price">${{item.price}}</span>
+              <span class="price">${{item.price}} | <a class="purchase" target="_blank" :href="item.link">PURCHASE</a></span> 
               <span class="rating">
                 Rating
                 <span class="inside-rating">{{ Math.floor(item.averageRating * 100) }}%</span>
@@ -83,13 +83,13 @@
                 <strong>x {{ Math.floor(item.ratingCount) }}</strong>
               </span>
 
+              
+
               <p>{{item.description}}</p>
             </div>
           </div>
         </li>
       </ul>
-
-      <!-- <div v-if="item.description != '' && item.ratingCount > 8"> -->
 
       <div v-else-if="results && results.length==0" class="no-results">
         <h2>No Wines Found</h2>
@@ -173,6 +173,26 @@ export default {
 </script>
 
 <style scoped>
+
+.container{
+  max-width:1460px;
+  margin:0 auto;
+}
+
+a.purchase{
+  font-size:.7em;
+  color: #94154b;
+  text-decoration: none;
+ 
+}
+a.purchase:hover{
+  color: black;
+}
+
+.margin-bottom{
+  margin-bottom:80px;
+}
+
 .wines-container {
   background-color: #f3f3f3;
   padding: 0px 30px 0px 30px;
@@ -226,7 +246,7 @@ p {
 
 .inside-rating {
   background-color: #94154b;
-  padding: 5px;
+  padding: 8px 4.5px 8px 8px;
   color: white;
 }
 
@@ -320,16 +340,13 @@ h2 {
   font-family: "Open Sans", sans-serif;
   font-weight: 100;
   color: #94154b;
-  font-size: 3.5em;
+  font-size: 3.85em;
 }
 
 form {
   padding: 30px;
 }
 
-.margin-bottom {
-  margin-bottom: 40px;
-}
 
 input[type="text"] {
   border: none;
@@ -369,7 +386,7 @@ button {
 .search-icon {
   color: white;
   background-color: #94154b;
-  padding: 8px;
+  padding: 8.9px;
 }
 
 .searchWord {
@@ -506,3 +523,5 @@ button {
   }
 }
 </style>
+
+
