@@ -1,9 +1,9 @@
 <template>
   <div class="Home">
+    <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
     <form v-on:submit.prevent="findWine" class="container">
-      <p class="ab-test">Select a wine and your max-price then search to see a list of recommended wines</p>
-
-      <div class="flex-container margin-bottom">
+      <p class="ab-test">Select a wine and your max-price per bottle, then search to see a list of recommended wines</p>
+       <div class="flex-container margin-bottom">
         <div>
           <label for="redWine" class="form-labels">
             RED
@@ -55,17 +55,25 @@
         </button>
       </div>
     </form>
+
+
+    <!-- font awesome spinner -->
     <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
     <div v-if="results && results.length > 0" class="rule"></div>
+
+    <!-- container for formatted api response -->
     <main class="wines-container">
+      <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
       <ul v-if="results && results.length > 0">
         <div class="container">
-        <p class="filter-text">FILTER</p>
-        <button class="filter-btn" @click="high">$ high to low</button>
-        <button class="filter-btn" @click="low">$ low to high</button>
-        <button class="filter-btn" @click="highestRatings">Highest Rated</button>
-        <button class="filter-btn" @click="mostRatings">Rating Count</button>
+          <p class="filter-text">FILTER</p>
+          <button class="filter-btn" @click="high">$ high to low</button>
+          <button class="filter-btn" @click="low">$ low to high</button>
+          <button class="filter-btn" @click="highestRatings">Highest Rated</button>
+          <button class="filter-btn" @click="mostRatings">Rating Count</button>
         </div>
+
+        <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
         <li v-for="item of results" class="wine-container container" :key="item.id">
           <div class="flex-container">
             <div class="twentyFive">
@@ -75,7 +83,10 @@
               <h2>
                 <strong>{{item.title}}</strong>
               </h2>
-              <span class="price">${{item.price}} | <a class="purchase" target="_blank" :href="item.link">PURCHASE</a></span> 
+              <span class="price">
+                ${{item.price}} |
+                <a class="purchase" target="_blank" :href="item.link">PURCHASE</a>
+              </span>
               <span class="rating">
                 Rating
                 <span class="inside-rating">{{ Math.floor(item.averageRating * 100) }}%</span>
@@ -85,19 +96,19 @@
                 <strong>x {{ Math.floor(item.ratingCount) }}</strong>
               </span>
 
-              
-
               <p>{{item.description}}</p>
             </div>
           </div>
         </li>
       </ul>
 
+      <!-- If the API doesn't return result from a properly filled out form -->
       <div v-else-if="results && results.length==0" class="no-results">
         <h2>No Wines Found</h2>
         <p>Please adjust your search</p>
       </div>
 
+      <!-- If the API can't return data because the form was filled out improperly -->
       <ul v-if="errors && errors.length > 0" class="errors">
         <li v-for="error of errors" :key="error">{{error.message}}</li>
       </ul>
@@ -108,38 +119,39 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Home",
+  name: "Home", //router
   data() {
     return {
       results: null,
       errors: [],
-      wine: "",
-      maxPrice: "",
-      spin:false
+      wine: "", //v-model in form above populates this value with user input on submit
+      maxPrice: "", //v-model connects this value to the user input for their desired price point
+      spin: false //sets the spinner to visibility hidden initially
     };
   },
   methods: {
     findWine: function() {
-      this.spin = true,
-      axios
-        .get("https://api.spoonacular.com/food/wine/recommendation", {
-          params: {
-            wine: this.wine,
-            number: 18,
-            minRating: 0.8,
-            maxPrice: this.maxPrice,
-            apiKey: "2c010ee91b164e24a2c25a653e110615"
-          }
-        })
-        .then(response => {
-          this.results = this.processData(response.data.recommendedWines);
-          this.spin = false
-        })
-        .catch(error => {
-          this.spin = false,
-          this.errors.push(error);
-        });
+      (this.spin = true), //shows spinner during API request
+        axios
+          .get("https://api.spoonacular.com/food/wine/recommendation", {
+            params: {
+              wine: this.wine, //dynamically adds the user's choice to the API request
+              number: 18,
+              minRating: 0.8,
+              maxPrice: this.maxPrice, //dynamically adds the users choice to the API request
+              apiKey: "2c010ee91b164e24a2c25a653e110615" //apply for a unique API key at spoonacular.com
+            }
+          })
+          .then(response => {
+            //API response 
+            this.results = this.processData(response.data.recommendedWines);
+            this.spin = false; //turns off visibility of spinner when response has loaded
+          })
+          .catch(error => {
+            (this.spin = false), this.errors.push(error);
+          });
     },
+    // google analytics click event goal 
     googleClick() {
       this.$ga.event({
         eventCategory: "mainApp",
@@ -148,6 +160,7 @@ export default {
         eventValue: 1
       });
     },
+    // code for filters
     high() {
       return this.results.sort(function(a, b) {
         return b.price - a.price;
@@ -168,6 +181,8 @@ export default {
         return b.ratingCount - a.ratingCount;
       });
     },
+
+    //This function takes each index in the results array and changes the results.price from a string to a number so that filter methods can compare them properly.
     processData: function(dataArr) {
       for (let data in dataArr) {
         dataArr[data].price = parseFloat(dataArr[data].price.substring(1));
@@ -178,20 +193,20 @@ export default {
 };
 </script>
 
-<style scoped>
 
-a.purchase{
-  font-size:.7em;
+<style scoped>
+/* styling for this specific view */
+a.purchase {
+  font-size: 0.7em;
   color: #94154b;
   text-decoration: none;
- 
 }
-a.purchase:hover{
+a.purchase:hover {
   color: black;
 }
 
-.margin-bottom{
-  margin-bottom:80px;
+.margin-bottom {
+  margin-bottom: 80px;
 }
 
 .wines-container {
@@ -241,7 +256,6 @@ p {
   font-weight: 700;
   color: #94154b;
   padding: 5px 0px 5px 5px;
-
   margin-top: 5px;
 }
 
@@ -249,6 +263,7 @@ p {
   background-color: #94154b;
   padding: 8px 4.5px 8px 8px;
   color: white;
+  margin:-1px;
 }
 
 .ratings {
@@ -348,7 +363,6 @@ form {
   padding: 30px;
 }
 
-
 input[type="text"] {
   border: none;
   border-bottom: 4px #94154b solid;
@@ -387,7 +401,8 @@ button {
 .search-icon {
   color: white;
   background-color: #94154b;
-  padding: 9px;
+  padding: 10px 17px 10px 17px;
+  margin:-2px;
 }
 
 .searchWord {
@@ -404,6 +419,10 @@ button {
   max-width: 20em;
   display: block;
   margin: 0 auto;
+}
+
+.no-results{
+  color:red;
 }
 
 /* form */
@@ -426,13 +445,13 @@ button {
   margin-right: 15px;
 }
 
-.spinner{
-  display:block;
-  margin:0 auto;
-  font-size:7em;
-  color:#94154b;
+.spinner {
+  display: block;
+  margin: 0 auto;
+  font-size: 7em;
+  color: #94154b;
   margin-top: -112px;
-  padding:30px;
+  padding: 30px;
 }
 
 /* responsive styles */
@@ -481,15 +500,14 @@ button {
 }
 
 @media screen and (max-width: 650px) {
-
-.spinner{
-  display:block;
-  margin:0 auto;
-  font-size:6em;
-  color:#94154b;
-  margin-top: -96px;
-  padding:20px;
-}
+  .spinner {
+    display: block;
+    margin: 0 auto;
+    font-size: 6em;
+    color: #94154b;
+    margin-top: -96px;
+    padding: 20px;
+  }
 
   .filter-btn {
     font-size: 0.75em;
