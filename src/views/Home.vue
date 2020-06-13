@@ -22,9 +22,10 @@
         <div>
           <label for="whiteWine" class="form-labels">WHITE</label>
           <select v-model="wine" name="whiteWine" id="whiteWine" class="select-css">
-            <option value="pinto grigio">Pinot Grigio</option>
+            <option value="pinot grigio">Pinot Grigio</option>
             <option value="chardonnay">Chardonnay</option>
             <option value="sauvignon blanc">Sauvignon blanc</option>
+            <option value="pinot gris">Pinot Gris</option>
           </select>
         </div>
         <div>
@@ -54,7 +55,8 @@
         </button>
       </div>
     </form>
-        <div v-if="results && results.length > 0" class="rule"></div>
+    <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
+    <div v-if="results && results.length > 0" class="rule"></div>
     <main class="wines-container">
       <ul v-if="results && results.length > 0">
         <div class="container">
@@ -112,11 +114,13 @@ export default {
       results: null,
       errors: [],
       wine: "",
-      maxPrice: ""
+      maxPrice: "",
+      spin:false
     };
   },
   methods: {
     findWine: function() {
+      this.spin = true,
       axios
         .get("https://api.spoonacular.com/food/wine/recommendation", {
           params: {
@@ -129,8 +133,10 @@ export default {
         })
         .then(response => {
           this.results = this.processData(response.data.recommendedWines);
+          this.spin = false
         })
         .catch(error => {
+          this.spin = false,
           this.errors.push(error);
         });
     },
@@ -173,11 +179,6 @@ export default {
 </script>
 
 <style scoped>
-
-.container{
-  max-width:1460px;
-  margin:0 auto;
-}
 
 a.purchase{
   font-size:.7em;
@@ -386,7 +387,7 @@ button {
 .search-icon {
   color: white;
   background-color: #94154b;
-  padding: 8.9px;
+  padding: 9px;
 }
 
 .searchWord {
@@ -396,7 +397,7 @@ button {
 .ab-test {
   text-align: center;
   font-weight: 100;
-  font-size: 1.92em;
+  font-size: 2em;
   padding: 80px 0px 90px 0;
   color: #94154b;
   font-family: "Abhaya Libre", serif;
@@ -423,6 +424,15 @@ button {
 .filter-text {
   display: inline-block;
   margin-right: 15px;
+}
+
+.spinner{
+  display:block;
+  margin:0 auto;
+  font-size:7em;
+  color:#94154b;
+  margin-top: -112px;
+  padding:30px;
 }
 
 /* responsive styles */
@@ -471,6 +481,16 @@ button {
 }
 
 @media screen and (max-width: 650px) {
+
+.spinner{
+  display:block;
+  margin:0 auto;
+  font-size:6em;
+  color:#94154b;
+  margin-top: -96px;
+  padding:20px;
+}
+
   .filter-btn {
     font-size: 0.75em;
   }
