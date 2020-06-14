@@ -4,18 +4,18 @@
       <!-- Global nav -->
       <nav class="flex-containerNav">
         <h1 class="ninety">
-           <!-- <router-link to="/"> points to Home.vue  -->
-          <router-link to="/"> 
+          <!-- <router-link to="/"> points to Home.vue  -->
+          <router-link to="/">
             <img class="logo" src="./assets/wineTime.svg" />
           </router-link>
         </h1>
-         <!-- <router-link to="/About"> points to About.vue -->
+        <!-- <router-link to="/About"> points to About.vue -->
         <router-link to="/About" class="ten about">About</router-link>
       </nav>
-       <!-- Global nav -->
+      <!-- Global nav -->
     </div>
     <!-- The router's current view will be injected into the application here with <router-view />  -->
-    <router-view /> 
+    <router-view />
   </div>
 </template>
 
@@ -32,7 +32,8 @@
 }
 
 ::selection {
-  background: lightsteelblue; 
+  background: teal;
+  color: white;
 }
 
 * {

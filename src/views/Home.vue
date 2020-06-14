@@ -2,8 +2,10 @@
   <div class="Home">
     <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
     <form v-on:submit.prevent="findWine" class="container">
-      <p class="ab-test">Select a wine and your max-price per bottle, then search to see a list of recommended wines</p>
-       <div class="flex-container margin-bottom">
+      <p
+        class="ab-test"
+      >Select a wine and your max-price per bottle, then search to see a list of recommended wines</p>
+      <div class="flex-container margin-bottom">
         <div>
           <label for="redWine" class="form-labels">
             RED
@@ -55,7 +57,6 @@
         </button>
       </div>
     </form>
-
 
     <!-- font awesome spinner -->
     <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
@@ -143,7 +144,7 @@ export default {
             }
           })
           .then(response => {
-            //API response 
+            //API response
             this.results = this.processData(response.data.recommendedWines);
             this.spin = false; //turns off visibility of spinner when response has loaded
           })
@@ -151,7 +152,7 @@ export default {
             (this.spin = false), this.errors.push(error);
           });
     },
-    // google analytics click event goal 
+    // google analytics click event goal
     googleClick() {
       this.$ga.event({
         eventCategory: "mainApp",
@@ -263,7 +264,7 @@ p {
   background-color: #94154b;
   padding: 8px 4.5px 8px 8px;
   color: white;
-  margin:-1px;
+  margin: -1px;
 }
 
 .ratings {
@@ -402,7 +403,7 @@ button {
   color: white;
   background-color: #94154b;
   padding: 10px 17px 10px 17px;
-  margin:-2px;
+  margin: -2px;
 }
 
 .searchWord {
@@ -421,8 +422,8 @@ button {
   margin: 0 auto;
 }
 
-.no-results{
-  color:red;
+.no-results {
+  color: red;
 }
 
 /* form */
