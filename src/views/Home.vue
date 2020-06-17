@@ -1,6 +1,7 @@
 <template>
-  <div class="Home">
+  <div id="Home">
     <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
+
     <form v-on:submit.prevent="findWine" class="container">
       <p
         class="ab-test"
@@ -58,6 +59,12 @@
       </div>
     </form>
 
+    <!-- <ul v-if="collection.length > 0">
+        <li v-for="wine of collection" :key="wine.id">
+          <a :href="wine.link" >{{wine.title}}</a>
+       </li>
+    </ul>-->
+
     <!-- font awesome spinner -->
     <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
     <div v-if="results && results.length > 0" class="rule"></div>
@@ -84,9 +91,10 @@
               <h2>
                 <strong>{{item.title}}</strong>
               </h2>
-              <span class="price">
+              <span class="price flex">
                 ${{item.price}} |
-                <a class="purchase" target="_blank" :href="item.link">PURCHASE</a>
+                <a class="purchase" target="_blank" :href="item.link">PURCHASE</a> |
+                <button @click="addToCollection(item)" class="collection_btn">Add to collection +</button>
               </span>
               <span class="rating">
                 Rating
@@ -127,8 +135,17 @@ export default {
       errors: [],
       wine: "", //v-model in form above populates this value with user input on submit
       maxPrice: "", //v-model connects this value to the user input for their desired price point
-      spin: false //sets the spinner to visibility hidden initially
+      spin: false, //sets the spinner to visibility hidden initially
+      collection: [],
+      // wineCollectionOn: false
     };
+  },
+  created() {
+    if (this.$ls.get("wine-collection")) {
+      this.collection = this.$ls.get("wine-collection");
+    } else {
+      this.$ls.set("wine-collection", this.collection);
+    }
   },
   methods: {
     findWine: function() {
@@ -189,6 +206,19 @@ export default {
         dataArr[data].price = parseFloat(dataArr[data].price.substring(1));
       }
       return dataArr;
+    },
+
+    addToCollection(title) {
+      if (this.collection.indexOf(title) === -1) {
+        this.collection.push(title);
+        this.$ls.set("wine-collection", this.collection);
+      } else {
+        console.log("Item is already in collection.");
+      }
+    },
+    removeItem(wine) {
+      this.collection.splice(this.collection.indexOf(wine), 1);
+      this.$ls.set("wine-collection", this.collection);
     }
   }
 };
@@ -197,6 +227,29 @@ export default {
 
 <style scoped>
 /* styling for this specific view */
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.collection_btn {
+  border: none;
+  /* background-color:#94154b; */
+  color: black;
+  /* padding:10px; */
+  height: 0em;
+  margin-left: 0em;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.54em;
+  padding: 0 10px 0 10px;
+  font-weight: 600;
+}
+
+.collection_btn:hover {
+  color: #94154b;
+}
+
 a.purchase {
   font-size: 0.7em;
   color: #94154b;
@@ -470,10 +523,6 @@ button {
   }
   button {
     margin-top: 10px;
-    background-color: transparent;
-    border: 4px #94154b solid;
-    height: 1.7em;
-    margin-left: 0;
   }
 
   .wine-container {

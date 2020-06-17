@@ -16,6 +16,7 @@
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
     "vue-analytics": "^5.22.1",
+    "vue-ls": "^3.2.1",
     "vue-router": "^3.1.6"
   },
   "devDependencies": {

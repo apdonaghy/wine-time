@@ -10,7 +10,9 @@
           </router-link>
         </h1>
         <!-- <router-link to="/About"> points to About.vue -->
-        <router-link to="/About" class="ten about">About</router-link>
+        <div class="ten about">
+          <router-link to="/Saved">Wine Collection</router-link> | <router-link to="/About">About</router-link> 
+        </div> 
       </nav>
       <!-- Global nav -->
     </div>
@@ -19,12 +21,24 @@
   </div>
 </template>
 
+<script>
+export default {
+ data(){
+   return{
+   }
+ }
+}
+</script>
+
 
 <style>
 /* Global Styles */
 
+
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap");
+
+
 
 .container {
   max-width: 1460px;
@@ -32,7 +46,7 @@
 }
 
 ::selection {
-  background: teal;
+  background: #94154b;
   color: white;
 }
 
@@ -66,7 +80,7 @@
 }
 
 .ten {
-  width: calc(10%);
+  width: calc(20%);
 }
 
 @media screen and (max-width: 650px) {
