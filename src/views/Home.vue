@@ -59,12 +59,6 @@
       </div>
     </form>
 
-    <!-- <ul v-if="collection.length > 0">
-        <li v-for="wine of collection" :key="wine.id">
-          <a :href="wine.link" >{{wine.title}}</a>
-       </li>
-    </ul>-->
-
     <!-- font awesome spinner -->
     <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
     <div v-if="results && results.length > 0" class="rule"></div>
@@ -226,6 +220,7 @@ export default {
 
 .collection_btn:hover {
   color: #94154b;
+
 }
 
 a.purchase {

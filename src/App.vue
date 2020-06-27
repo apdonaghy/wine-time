@@ -11,7 +11,7 @@
         </h1>
         <!-- <router-link to="/About"> points to About.vue -->
         <div class="ten about">
-          <router-link to="/Saved">Wine Collection</router-link> | <router-link to="/About">About</router-link> 
+          <router-link to="/Saved">Wine Collection</router-link> <span class="separate">|</span> <router-link to="/About">About</router-link> 
         </div> 
       </nav>
       <!-- Global nav -->
@@ -39,6 +39,10 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap");
 
 
+.separate{
+  font-size:1.4em;
+  margin: 0 5px 0 5px;
+}
 
 .container {
   max-width: 1460px;
@@ -99,10 +103,15 @@ export default {
   }
 }
 
-.about {
+.about a{
   font-family: "Abhaya Libre", serif;
   text-decoration: none;
   font-size: 1.5em;
   color: #94154b;
 }
+
+.about a:hover{
+  color:black;
+}
+
 </style>

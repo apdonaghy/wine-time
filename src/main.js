@@ -5,20 +5,13 @@ import router from './router'
 import VueAnalytics from 'vue-analytics'
 
 // font awesome icons
-import {
-  library
-} from '@fortawesome/fontawesome-svg-core'
-import {
-  faSearch
-} from '@fortawesome/free-solid-svg-icons'
-import {
-  faCircleNotch
-} from '@fortawesome/free-solid-svg-icons'
-import {
-  FontAwesomeIcon
-} from '@fortawesome/vue-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faSearch} from '@fortawesome/free-solid-svg-icons'
+import {faCircleNotch} from '@fortawesome/free-solid-svg-icons'
+import {faTimes} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
-library.add(faSearch, faCircleNotch)
+library.add(faSearch, faCircleNotch, faTimes)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
