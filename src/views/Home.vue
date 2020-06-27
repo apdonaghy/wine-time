@@ -217,6 +217,7 @@ export default {
   padding: 0 10px 0 10px;
   font-weight: 600;
   cursor: pointer;
+  display:inline-block;
 }
 
 

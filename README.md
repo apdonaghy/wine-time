@@ -27,7 +27,7 @@ To run this project on a development server, run:
 When ready to deploy run:
 ```npm run build```
 
-*Note, the because of the setup of the vue.config.js file, running "build" will add the production ready files to the docs folder.*
+*Note: because of the setup of the vue.config.js file, running "build" will add the production ready files to the docs folder.*
 
 
 

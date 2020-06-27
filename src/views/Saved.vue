@@ -24,6 +24,10 @@ export default {
 
 <style scoped>
 
+*{
+  background-color:#94154b;
+}
+
 .exit{
   padding-top: 12px;
   cursor: pointer;
@@ -68,7 +72,7 @@ a:hover{
 }
 
 li{
-  margin-bottom:25px;
+    padding-bottom:25px;
    font-weight:100;
 }
 
