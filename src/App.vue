@@ -50,7 +50,7 @@ export default {
 }
 
 ::selection {
-  background: #94154b;
+  background: black;
   color: white;
 }
 

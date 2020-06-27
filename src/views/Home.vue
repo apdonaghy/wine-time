@@ -88,7 +88,7 @@
               <span class="price flex">
                 ${{item.price}} |
                 <a class="purchase" target="_blank" :href="item.link">PURCHASE</a> |
-                <button @click="$store.wine_collection.addToCollection(item)" class="collection_btn">Add to collection +</button>
+                <span @click="$store.wine_collection.addToCollection(item)" class="collection_btn">Add to collection +</span>
               </span>
               <span class="rating">
                 Rating
@@ -211,12 +211,15 @@ export default {
   color: black;
   /* padding:10px; */
   height: 0em;
-  margin-left: 0em;
+  margin-left: -.5em;
   font-family: "Open Sans", sans-serif;
-  font-size: 0.54em;
+  font-size: 0.58em;
   padding: 0 10px 0 10px;
   font-weight: 600;
+  cursor: pointer;
 }
+
+
 
 .collection_btn:hover {
   color: #94154b;

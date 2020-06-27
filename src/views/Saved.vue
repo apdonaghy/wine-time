@@ -37,6 +37,7 @@ export default {
   background-color: #94154b;
   height:100vh;
   width:100vw;
+  
 }
 
 ol{
@@ -50,6 +51,9 @@ ol{
   /* width:80%; */
   margin:0 auto;
   padding-top:8%;
+  padding-left:20px;
+  padding-right:20px;
+ 
 }
 
 a{
