@@ -39,8 +39,8 @@ export default {
 
 .saved{
   background-color: #94154b;
-  height:100vh;
-  width:100vw;
+  height:100%;
+  width:100%;
   
 }
 
@@ -83,6 +83,10 @@ h2{
   font-weight:400;
   border-bottom:5px solid white;
   margin-bottom:60px;
+}
+
+ol:last-child{
+  padding-bottom:75px;
 }
 
 </style>
