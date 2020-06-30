@@ -218,6 +218,7 @@ export default {
   font-weight: 600;
   cursor: pointer;
   display:inline-block;
+  letter-spacing: .03em;
 }
 
 
@@ -388,6 +389,7 @@ font-family: 'Sarabun', sans-serif;
   font-weight: 100;
   color:white;
   font-size: 3.85em;
+  letter-spacing: .015em;
 }
 
 form {
