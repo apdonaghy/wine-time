@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Slide right noOverlay @click="openMenu"> 
+ <Slide right noOverlay> 
  <router-link to="/">Home</router-link> 
  <router-link to="/Saved">Wine Collection</router-link> 
  <router-link to="/About">About</router-link>
@@ -14,14 +14,9 @@ import { Slide } from "vue-burger-menu";
 export default {
   data() {
     return {
-      open: false
     };
   },
-  methods: {
-    openMenu() {
-      this.open = true;
-    }
-  },
+ 
   components: {
     Slide
   }

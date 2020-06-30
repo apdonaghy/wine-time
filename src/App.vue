@@ -48,7 +48,7 @@ export default {
     methods: {
         resize() {
             this.windowWidth = window.innerWidth;
-            if(this.windowWidth >= 1375){
+            if(this.windowWidth >= 900){
                 this.desktop = true;
                 this.mobile = false;
             } else{
@@ -66,10 +66,14 @@ export default {
 <style>
 /* Global Styles */
 
-
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;200;300;400;600;700&display=swap');
 
+
+body{
+  background-color:#94154b;
+}
 
 .separate{
   font-size:1.4em;
@@ -93,71 +97,43 @@ export default {
 }
 
 .logo {
-  width: 30%;
-  padding: 15px 0 15px 15px;
-  display: inline-block;
+  width: 300px;
+  
 }
 
 .grey {
   background-color: #f3f3f3;
+  height:59px;
 }
 
 .flex-containerNav {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   max-width: 1460px;
   margin: 0 auto;
+  justify-content: space-between;
+  padding:7px 20px 2px 20px;
 }
 
-.ninety {
-  width: calc(90%);
-}
 
-.ten {
-  width: calc(20%);
-}
 
 
 .bm-burger-button {
 
-    top: 26px;
-
-}
-
-@media screen and (max-width: 1100px) {
-  .bm-burger-button {
-
-    top: 20px;
-
-}
+    top: 14px;
 
 }
 
 
-@media screen and (max-width: 900px) {
-  .bm-burger-button {
-
-    top: 15px;
-
+@media screen and (max-width: 500px) {
+ 
+.logo {
+  padding-top:6px;
+  width: 200px;
+  
 }
-}
-
-@media screen and (max-width: 650px) {
-  .ninety {
-    width: calc(80%);
-  }
-
-  .ten {
-    width: calc(20%);
-  }
-
-  .logo {
-    width: 50%;
-    padding: 15px 0 15px 15px;
-    display: inline-block;
-  }
 
 }
 

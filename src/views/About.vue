@@ -25,9 +25,8 @@
   font-size: 3em;
   line-height: 1.3em;
   color: #94154b;
-  padding: 10px;
+  padding: 7% 10px 0px 10px;
   margin: auto;
-  margin-top: 7%;
   max-width: 1460px;
 }
 
@@ -79,4 +78,11 @@ a {
     font-size: 0.35em;
   }
 }
+
+#About{
+  background-color:white;
+  width:100vw;
+  height:100vh;
+}
+
 </style>

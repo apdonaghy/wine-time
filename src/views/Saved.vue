@@ -36,11 +36,7 @@ export default {
   color:black; 
 }
 
-.saved{
-  background-color:#94154b;
-  width:auto;
-  height: 100vw;
-}
+
 
 ol{
   color:white;
@@ -85,6 +81,39 @@ h2{
 
 ol:last-child{
   padding-bottom:75px;
+}
+
+
+@media screen and (max-width: 1372px) {
+
+.wine-list{
+  padding-left:40px;
+  padding-right:40px;
+ 
+ }
+
+ ol{
+  font-size:2.5em;
+}
+
+}
+
+@media screen and (max-width: 900px) {
+   ol{
+  font-size:2em;
+}
+}
+
+@media screen and (max-width: 600px) {
+   ol{
+  font-size:1.5em;
+   padding-left:20px;
+}
+
+.exit{
+  padding-top: 6px;
+  cursor: pointer;
+}
 }
 
 </style>

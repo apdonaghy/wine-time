@@ -212,7 +212,7 @@ export default {
   /* padding:10px; */
   height: 0em;
   margin-left: -.5em;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-size: 0.58em;
   padding: 0 10px 0 10px;
   font-weight: 600;
@@ -298,7 +298,7 @@ p {
 }
 
 .ratings {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   color: #94154b;
   display: block;
   margin-top: 6px;
@@ -348,9 +348,9 @@ h2 {
 .select-css {
   display: block;
   font-size: 2.15em;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 700;
-  color: #94154b;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 600;
+  color: white;
   line-height: 1.3;
   padding: 0.6em 1.4em 0.5em 0em;
   background-color: transparent;
@@ -361,22 +361,22 @@ h2 {
   margin: 0;
   border: none;
   border-radius: 0;
-  border-bottom: 4px #94154b solid;
+  border-bottom: 4px white solid;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
 }
 .select-css::-ms-expand {
-  color: #94154b;
+  color: white;
 }
 .select-css:hover {
-  border-color: #888;
+  border-color: black;
 }
 .select-css:focus {
-  border-color: #aaa;
+  border-color: black;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
   box-shadow: 0 0 0 3px -moz-mac-focusring;
-  color: #94154b;
+  color: white;
   outline: none;
 }
 .select-css option {
@@ -384,9 +384,9 @@ h2 {
 }
 
 .form-labels {
-  font-family: "Open Sans", sans-serif;
+font-family: 'Sarabun', sans-serif;
   font-weight: 100;
-  color: #94154b;
+  color:white;
   font-size: 3.85em;
 }
 
@@ -396,15 +396,15 @@ form {
 
 input[type="text"] {
   border: none;
-  border-bottom: 4px #94154b solid;
+  border-bottom: 4px white solid;
   background-image: none;
-  background-color: transparent;
+  background-color: #94154b;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 500;
-  color: #94154b;
+  color: white;
   font-size: 3.5em;
   width: 1.75em;
 }
@@ -415,7 +415,7 @@ input[type="text"] {
 
 button {
   background-color: transparent;
-  border: 4px #94154b solid;
+  border: 4px white solid;
   height: 1.7em;
   margin-left: 1.5em;
   cursor: pointer;
@@ -430,8 +430,8 @@ button {
 }
 
 .search-icon {
-  color: white;
-  background-color: #94154b;
+  color:#94154b;
+  background-color: white;
   padding: 10px 17px 10px 17px;
   margin: -2px;
 }
@@ -445,7 +445,7 @@ button {
   font-weight: 100;
   font-size: 2em;
   padding: 80px 0px 90px 0;
-  color: #94154b;
+  color: white;
   font-family: "Abhaya Libre", serif;
   max-width: 20em;
   display: block;
@@ -480,7 +480,7 @@ button {
   display: block;
   margin: 0 auto;
   font-size: 7em;
-  color: #94154b;
+  color: white;
   margin-top: -112px;
   padding: 30px;
 }
@@ -597,6 +597,9 @@ button {
     font-size: 1.4em;
   }
 }
+
+
+
 </style>
 
 
