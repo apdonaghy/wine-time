@@ -526,6 +526,16 @@ button {
   }
 }
 
+@media screen and (max-width: 879px) {
+
+  button {
+
+  margin-left: 0em;
+
+}
+
+}
+
 @media screen and (max-width: 650px) {
   .spinner {
     display: block;

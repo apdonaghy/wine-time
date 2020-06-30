@@ -10,7 +10,7 @@
     </ol>
     </div>
   </div>
-  
+
 </template>
 
 <script>
@@ -24,9 +24,8 @@ export default {
 
 <style scoped>
 
-*{
-  background-color:#94154b;
-}
+
+
 
 .exit{
   padding-top: 12px;
@@ -38,10 +37,9 @@ export default {
 }
 
 .saved{
-  background-color: #94154b;
-  height:100%;
-  width:100%;
-  
+  background-color:#94154b;
+  width:auto;
+  height: 100vw;
 }
 
 ol{

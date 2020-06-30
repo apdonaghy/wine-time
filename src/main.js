@@ -11,6 +11,7 @@ import {faCircleNotch} from '@fortawesome/free-solid-svg-icons'
 import {faTimes} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
+
 library.add(faSearch, faCircleNotch, faTimes)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

@@ -10,7 +10,8 @@
           </router-link>
         </h1>
         <!-- <router-link to="/About"> points to About.vue -->
-        <div class="ten about">
+        <Menu v-show="mobile"></Menu>
+        <div v-show="desktop" class="ten about">
           <router-link to="/Saved">Wine Collection</router-link> <span class="separate">|</span> <router-link to="/About">About</router-link> 
         </div> 
       </nav>
@@ -22,12 +23,43 @@
 </template>
 
 <script>
+
+import Menu from "./components/Menu.vue";
+
 export default {
- data(){
-   return{
-   }
- }
-}
+  name: "App",
+  components: {
+    Menu
+  },
+    data() {
+    return {
+      mobile:false,
+      desktop:false,
+      windowWidth: 0
+    };
+  },
+  created() {
+        window.addEventListener('resize', this.resize);
+        this.resize();
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.resize);
+    },
+    methods: {
+        resize() {
+            this.windowWidth = window.innerWidth;
+            if(this.windowWidth >= 1375){
+                this.desktop = true;
+                this.mobile = false;
+            } else{
+                this.desktop = false;
+                this.mobile = true;
+            }
+       
+        }
+    }
+
+};
 </script>
 
 
@@ -87,6 +119,31 @@ export default {
   width: calc(20%);
 }
 
+
+.bm-burger-button {
+
+    top: 26px;
+
+}
+
+@media screen and (max-width: 1100px) {
+  .bm-burger-button {
+
+    top: 20px;
+
+}
+
+}
+
+
+@media screen and (max-width: 900px) {
+  .bm-burger-button {
+
+    top: 15px;
+
+}
+}
+
 @media screen and (max-width: 650px) {
   .ninety {
     width: calc(80%);
@@ -101,6 +158,7 @@ export default {
     padding: 15px 0 15px 15px;
     display: inline-block;
   }
+
 }
 
 .about a{
@@ -113,5 +171,8 @@ export default {
 .about a:hover{
   color:black;
 }
+
+
+
 
 </style>
