@@ -71,9 +71,9 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;200;300;400;600;700&display=swap');
 
 
-body{
+/* body{
   background-color:#94154b;
-}
+} */
 
 .separate{
   font-size:1.4em;

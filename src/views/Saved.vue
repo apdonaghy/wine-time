@@ -33,13 +33,13 @@ export default {
 }
 
 .exit:hover{
-  color:black; 
+  color:#94154b; 
 }
 
 
 
 ol{
-  color:white;
+  color:black;
   font-family: "Abhaya Libre", serif;
   font-size:3em;
   padding-left:40px;
@@ -56,26 +56,26 @@ ol{
 
 a{
   text-decoration: none;
-  color:white;
+  color:black;
   text-decoration: underline;
    
 }
 
 a:hover{
-  color:black;
+  color: #94154b;
 }
 
 li{
     padding-bottom:25px;
-   font-weight:100;
+    font-weight:100;
 }
 
 h2{
-  color:white;
+  color:#94154b;
   font-family: "Abhaya Libre", serif;
   font-size:2em;
   font-weight:400;
-  border-bottom:5px solid white;
+  border-bottom:5px solid #94154b;
   margin-bottom:60px;
 }
 

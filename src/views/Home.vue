@@ -1,7 +1,7 @@
 <template>
   <div id="Home">
     <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
-
+    <div class="redBackground">
     <form v-on:submit.prevent="findWine" class="container">
       <p
         class="ab-test"
@@ -62,7 +62,7 @@
     <!-- font awesome spinner -->
     <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
     <div v-if="results && results.length > 0" class="rule"></div>
-
+    </div>
     <!-- container for formatted api response -->
     <main class="wines-container">
       <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
@@ -199,6 +199,11 @@ export default {
 
 <style scoped>
 /* styling for this specific view */
+
+.redBackground{
+  background-color:#94154b;
+  height:100vh;
+}
 
 .flex {
   display: flex;
@@ -372,10 +377,10 @@ h2 {
   color: white;
 }
 .select-css:hover {
-  border-color: black;
+  border-color: lightgray;
 }
 .select-css:focus {
-  border-color: black;
+  border-color: lightgray;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
   box-shadow: 0 0 0 3px -moz-mac-focusring;
   color: white;
@@ -426,6 +431,8 @@ button {
   margin-left: 1.5em;
   cursor: pointer;
 }
+
+
 
 .search {
   display: inline;
