@@ -212,13 +212,13 @@ export default {
   /* padding:10px; */
   height: 0em;
   margin-left: -.5em;
-  font-family: 'Sarabun', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 0.58em;
   padding: 0 10px 0 10px;
-  font-weight: 600;
+  font-weight:700;
   cursor: pointer;
   display:inline-block;
-  letter-spacing: .03em;
+  
 }
 
 
@@ -299,7 +299,7 @@ p {
 }
 
 .ratings {
-  font-family: 'Sarabun', sans-serif;
+font-family: "Open Sans", sans-serif;
   color: #94154b;
   display: block;
   margin-top: 6px;
@@ -366,6 +366,7 @@ h2 {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+  letter-spacing: .02em;
 }
 .select-css::-ms-expand {
   color: white;
@@ -382,6 +383,7 @@ h2 {
 }
 .select-css option {
   font-weight: normal;
+  
 }
 
 .form-labels {
@@ -410,6 +412,7 @@ input[type="text"] {
   color: white;
   font-size: 3.5em;
   width: 1.75em;
+  
 }
 
 .fiveHundred {
@@ -544,10 +547,15 @@ button {
     display: block;
     margin: 0 auto;
     font-size: 6em;
-    color: #94154b;
+    color: white;
     margin-top: -96px;
     padding: 20px;
   }
+
+  p {
+  font-size: 1em;
+  line-height: 1.5em;
+}
 
   .filter-btn {
     font-size: 0.75em;
