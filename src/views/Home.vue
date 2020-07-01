@@ -399,6 +399,7 @@ form {
 input[type="text"] {
   border: none;
   border-bottom: 4px white solid;
+  /* text-decoration: underline; */
   background-image: none;
   background-color: #94154b;
   -webkit-box-shadow: none;

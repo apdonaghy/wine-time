@@ -118,13 +118,15 @@ body{
 }
 
 
+@media screen and (max-width: 900px) {
 
+.flex-containerNav {
 
-.bm-burger-button {
-
-    top: 14px;
+  align-items: unset;
 
 }
+}
+
 
 
 @media screen and (max-width: 500px) {
