@@ -2,66 +2,66 @@
   <div id="Home">
     <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
     <div class="redBackground">
-    <form v-on:submit.prevent="findWine" class="container">
-      <p
-        class="ab-test"
-      >Select a wine and your max-price per bottle, then search to see a list of recommended wines</p>
-      <div class="flex-container margin-bottom">
-        <div>
-          <label for="redWine" class="form-labels">
-            RED
-            <i class="fas fa-angle-down"></i>
-          </label>
-          <select v-model="wine" name="redWine" id="redWine" class="select-css">
-            <option value="cabernet sauvignon">Cabernet Sauvignon</option>
-            <option value="merlot">Merlot</option>
-            <option value="pinot noir">Pinot Noir</option>
-            <option value="bordeaux">Bordeaux</option>
-            <option value="syrah">Syrah</option>
-            <option value="malbec">Malbec</option>
-            <option value="zinfandel">Zinfandel</option>
-          </select>
+      <form v-on:submit.prevent="findWine" class="container">
+        <p
+          class="ab-test"
+        >Select a wine and your max-price per bottle, then search to see a list of recommended wines</p>
+        <div class="flex-container margin-bottom">
+          <div>
+            <label for="redWine" class="form-labels">
+              RED
+              <i class="fas fa-angle-down"></i>
+            </label>
+            <select v-model="wine" name="redWine" id="redWine" class="select-css">
+              <option value="cabernet sauvignon">Cabernet Sauvignon</option>
+              <option value="merlot">Merlot</option>
+              <option value="pinot noir">Pinot Noir</option>
+              <option value="bordeaux">Bordeaux</option>
+              <option value="syrah">Syrah</option>
+              <option value="malbec">Malbec</option>
+              <option value="zinfandel">Zinfandel</option>
+            </select>
+          </div>
+          <div>
+            <label for="whiteWine" class="form-labels">WHITE</label>
+            <select v-model="wine" name="whiteWine" id="whiteWine" class="select-css">
+              <option value="pinot grigio">Pinot Grigio</option>
+              <option value="chardonnay">Chardonnay</option>
+              <option value="sauvignon blanc">Sauvignon blanc</option>
+              <option value="pinot gris">Pinot Gris</option>
+            </select>
+          </div>
+          <div>
+            <label for="sparklingWine" class="form-labels">SPARKLING</label>
+            <select v-model="wine" name="sparklingWine" id="sparklingWine" class="select-css">
+              <option value="champagne">Champagne</option>
+              <option value="cava">Cava</option>
+              <option value="prosecco">Prosecco</option>
+              <option value="sparkling wine">Sparkling Wine</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <label for="whiteWine" class="form-labels">WHITE</label>
-          <select v-model="wine" name="whiteWine" id="whiteWine" class="select-css">
-            <option value="pinot grigio">Pinot Grigio</option>
-            <option value="chardonnay">Chardonnay</option>
-            <option value="sauvignon blanc">Sauvignon blanc</option>
-            <option value="pinot gris">Pinot Gris</option>
-          </select>
-        </div>
-        <div>
-          <label for="sparklingWine" class="form-labels">SPARKLING</label>
-          <select v-model="wine" name="sparklingWine" id="sparklingWine" class="select-css">
-            <option value="champagne">Champagne</option>
-            <option value="cava">Cava</option>
-            <option value="prosecco">Prosecco</option>
-            <option value="sparkling wine">Sparkling Wine</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="flex-container3 margin-bottom">
-        <div>
-          <label for="max-price" class="form-labels">
-            MAX PRICE
-            <strong class="fiveHundred">$</strong>
-          </label>
-          <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
+        <div class="flex-container3 margin-bottom">
+          <div>
+            <label for="max-price" class="form-labels">
+              MAX PRICE
+              <strong class="fiveHundred">$</strong>
+            </label>
+            <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
+          </div>
+          <button @click="googleClick" type="submit" class="form-labels">
+            <span class="search-icon">
+              <font-awesome-icon icon="search" />
+            </span>
+            <span class="searchWord">SEARCH</span>
+          </button>
         </div>
-        <button @click="googleClick" type="submit" class="form-labels">
-          <span class="search-icon">
-            <font-awesome-icon icon="search" />
-          </span>
-          <span class="searchWord">SEARCH</span>
-        </button>
-      </div>
-    </form>
+      </form>
 
-    <!-- font awesome spinner -->
-    <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
-    <div v-if="results && results.length > 0" class="rule"></div>
+      <!-- font awesome spinner -->
+      <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
+      <div v-if="results && results.length > 0" class="rule"></div>
     </div>
     <!-- container for formatted api response -->
     <main class="wines-container">
@@ -88,7 +88,10 @@
               <span class="price flex">
                 ${{item.price}} |
                 <a class="purchase" target="_blank" :href="item.link">PURCHASE</a> |
-                <span @click="$store.wine_collection.addToCollection(item)" class="collection_btn">Add to collection +</span>
+                <span
+                  @click="$store.wine_collection.addToCollection(item)"
+                  class="collection_btn"
+                >Add to collection +</span>
               </span>
               <span class="rating">
                 Rating
@@ -129,7 +132,7 @@ export default {
       errors: [],
       wine: "", //v-model in form above populates this value with user input on submit
       maxPrice: "", //v-model connects this value to the user input for their desired price point
-      spin: false, //sets the spinner to visibility hidden initially
+      spin: false //sets the spinner to visibility hidden initially
     };
   },
   methods: {
@@ -200,9 +203,9 @@ export default {
 <style scoped>
 /* styling for this specific view */
 
-.redBackground{
-  background-color:#94154b;
-  height:100vh;
+.redBackground {
+  background-color: #94154b;
+  height: 100vh;
 }
 
 .flex {
@@ -216,21 +219,17 @@ export default {
   color: black;
   /* padding:10px; */
   height: 0em;
-  margin-left: -.5em;
+  margin-left: -0.5em;
   font-family: "Open Sans", sans-serif;
   font-size: 0.58em;
   padding: 0 10px 0 10px;
-  font-weight:700;
+  font-weight: 700;
   cursor: pointer;
-  display:inline-block;
-  
+  display: inline-block;
 }
-
-
 
 .collection_btn:hover {
   color: #94154b;
-
 }
 
 a.purchase {
@@ -304,7 +303,7 @@ p {
 }
 
 .ratings {
-font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #94154b;
   display: block;
   margin-top: 6px;
@@ -354,7 +353,7 @@ h2 {
 .select-css {
   display: block;
   font-size: 2.15em;
-  font-family: 'Sarabun', sans-serif;
+  font-family: "Sarabun", sans-serif;
   font-weight: 600;
   color: white;
   line-height: 1.3;
@@ -371,7 +370,7 @@ h2 {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
 }
 .select-css::-ms-expand {
   color: white;
@@ -388,15 +387,14 @@ h2 {
 }
 .select-css option {
   font-weight: normal;
-  
 }
 
 .form-labels {
-font-family: 'Sarabun', sans-serif;
+  font-family: "Sarabun", sans-serif;
   font-weight: 100;
-  color:white;
+  color: white;
   font-size: 3.85em;
-  letter-spacing: .015em;
+  letter-spacing: 0.015em;
 }
 
 form {
@@ -412,12 +410,11 @@ input[type="text"] {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  font-family: 'Sarabun', sans-serif;
+  font-family: "Sarabun", sans-serif;
   font-weight: 500;
   color: white;
   font-size: 3.5em;
   width: 1.75em;
-  
 }
 
 .fiveHundred {
@@ -432,8 +429,6 @@ button {
   cursor: pointer;
 }
 
-
-
 .search {
   display: inline;
   max-height: 40px;
@@ -443,7 +438,7 @@ button {
 }
 
 .search-icon {
-  color:#94154b;
+  color: #94154b;
   background-color: white;
   padding: 10px 17px 10px 17px;
   margin: -2px;
@@ -500,6 +495,12 @@ button {
 
 /* responsive styles */
 
+@media screen and (max-width: 1400px) {
+  .redBackground {
+    height: auto;
+  }
+}
+
 @media screen and (max-width: 1100px) {
   .flex-container {
     flex-wrap: wrap;
@@ -540,13 +541,9 @@ button {
 }
 
 @media screen and (max-width: 879px) {
-
   button {
-
-  margin-left: 0em;
-
-}
-
+    margin-left: 0em;
+  }
 }
 
 @media screen and (max-width: 650px) {
@@ -560,9 +557,9 @@ button {
   }
 
   p {
-  font-size: 1em;
-  line-height: 1.5em;
-}
+    font-size: 1em;
+    line-height: 1.5em;
+  }
 
   .filter-btn {
     font-size: 0.75em;
@@ -615,9 +612,6 @@ button {
     font-size: 1.4em;
   }
 }
-
-
-
 </style>
 
 
