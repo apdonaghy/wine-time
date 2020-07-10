@@ -16,14 +16,14 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      close: false
+    };
   }
-
 };
 </script>
 
 <style scoped>
-
 
 
 
@@ -114,6 +114,15 @@ ol:last-child{
   padding-top: 6px;
   cursor: pointer;
 }
+}
+
+/* tooltip */
+
+[data-tooltip],
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  text-align: center;
 }
 
 </style>

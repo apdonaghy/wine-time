@@ -495,7 +495,7 @@ button {
 
 /* responsive styles */
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1600px) {
   .redBackground {
     height: auto;
   }
