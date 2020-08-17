@@ -1,7 +1,7 @@
 <template>
   <div id="Home">
     <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
-    <div class="redBackground">
+    <div>
       <form v-on:submit.prevent="findWine" class="container">
         <p
           class="ab-test"
@@ -50,11 +50,11 @@
             </label>
             <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
           </div>
-          <button @click="googleClick" type="submit" class="form-labels">
-            <span class="search-icon">
-              <font-awesome-icon icon="search" />
-            </span>
-            <span class="searchWord">SEARCH</span>
+          <button @click="googleClick" type="submit" class="form-labels searchWord">          
+          
+              <font-awesome-icon class="search-icon" icon="search" />
+              SEARCH
+   
           </button>
         </div>
       </form>
@@ -351,13 +351,14 @@ h2 {
 /* form */
 
 .select-css {
+  cursor: pointer;
   display: block;
-  font-size: 2.15em;
-  font-family: "Sarabun", sans-serif;
+  font-size: 2.35em;
+  font-family: var(--narrowMedium);
   font-weight: 600;
-  color: white;
-  line-height: 1.3;
-  padding: 0.6em 1.4em 0.5em 0em;
+  color:#94154b;
+  /* line-height: 1.3; */
+  padding: 0.6em 1.4em 0.2em 0em;
   background-color: transparent;
   background-image: url("../assets/arrow.svg");
   background-repeat: no-repeat, repeat;
@@ -366,14 +367,14 @@ h2 {
   margin: 0;
   border: none;
   border-radius: 0;
-  border-bottom: 4px white solid;
+  border-bottom: 4px #94154b solid;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  letter-spacing: 0.02em;
+  margin-bottom:1em;
 }
 .select-css::-ms-expand {
-  color: white;
+  color: #94154b;
 }
 .select-css:hover {
   border-color: lightgray;
@@ -382,7 +383,7 @@ h2 {
   border-color: lightgray;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
   box-shadow: 0 0 0 3px -moz-mac-focusring;
-  color: white;
+  color: #94154b;
   outline: none;
 }
 .select-css option {
@@ -390,11 +391,11 @@ h2 {
 }
 
 .form-labels {
-  font-family: "Sarabun", sans-serif;
+  font-family: var(--narrow);
   font-weight: 100;
-  color: white;
-  font-size: 3.85em;
-  letter-spacing: 0.015em;
+  color: #94154b;
+  font-size: 3.7em;
+
 }
 
 form {
@@ -403,18 +404,19 @@ form {
 
 input[type="text"] {
   border: none;
-  border-bottom: 4px white solid;
+  border-bottom: 4px #94154b solid;
   /* text-decoration: underline; */
   background-image: none;
-  background-color: #94154b;
+  background-color: transparent;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
   font-family: "Sarabun", sans-serif;
   font-weight: 500;
-  color: white;
+  color: #94154b;
   font-size: 3.5em;
   width: 1.75em;
+  margin-bottom:1em;
 }
 
 .fiveHundred {
@@ -423,37 +425,36 @@ input[type="text"] {
 
 button {
   background-color: transparent;
-  border: 4px white solid;
+  border: 4px #94154b solid;
   height: 1.7em;
-  margin-left: 1.5em;
   cursor: pointer;
+  padding-left:.3em;
+  padding-right: .3em;
+  margin-top: -9px;
+  margin-left:.5em;
+
 }
 
-.search {
-  display: inline;
-  max-height: 40px;
-}
-.searchWord {
-  display: inline;
+button:hover {
+  color:white;
+  background-color: #94154b;
+  transition: .3s;
 }
 
-.search-icon {
-  color: #94154b;
-  background-color: white;
-  padding: 10px 17px 10px 17px;
-  margin: -2px;
+
+.search-icon{
+  padding-right: .1em;
 }
 
-.searchWord {
-  padding: 0 12px 0 10px;
-}
+
+
 
 .ab-test {
   text-align: center;
   font-weight: 100;
   font-size: 2em;
   padding: 80px 0px 90px 0;
-  color: white;
+  color: #94154b;
   font-family: "Abhaya Libre", serif;
   max-width: 20em;
   display: block;
@@ -488,7 +489,7 @@ button {
   display: block;
   margin: 0 auto;
   font-size: 7em;
-  color: white;
+  color: #94154b;
   margin-top: -112px;
   padding: 30px;
 }
@@ -544,6 +545,9 @@ button {
   button {
     margin-left: 0em;
   }
+  .form-labels {
+    font-size:2.25em;
+  }
 }
 
 @media screen and (max-width: 650px) {
@@ -569,6 +573,7 @@ button {
     display: block;
     font-size: 1.7em;
     margin: 0 auto;
+    margin-bottom:1.2em;
   }
   h2 {
     font-size: 2.25em;

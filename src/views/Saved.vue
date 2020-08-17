@@ -46,11 +46,9 @@ ol{
 }
 
 .wine-list{
-  /* width:80%; */
   margin:0 auto;
+  max-width: 1460px;
   padding-top:8%;
-  padding-left:20px;
-  padding-right:20px;
  
 }
 
@@ -73,7 +71,7 @@ li{
 h2{
   color:#94154b;
   font-family: "Abhaya Libre", serif;
-  font-size:2em;
+  font-size:2rem;
   font-weight:400;
   border-bottom:5px solid #94154b;
   margin-bottom:60px;
@@ -84,13 +82,34 @@ ol:last-child{
 }
 
 
+
+@media screen and (max-width: 1550px) {
+
+  .wine-list {
+    max-width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .wine-list {
+    max-width: 800px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+   .wine-list {
+    max-width: 550px;
+    padding:20px
+  }
+  }
+
+
+
+
+
+
 @media screen and (max-width: 1372px) {
 
-.wine-list{
-  padding-left:40px;
-  padding-right:40px;
- 
- }
 
  ol{
   font-size:2.5em;

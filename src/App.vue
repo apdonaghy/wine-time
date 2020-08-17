@@ -68,10 +68,21 @@ export default {
 
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;200;300;400;600;700&display=swap');
 
+@font-face {
+  font-family: "narrow";
+  src: url(../public/fonts/din_LightAlternate.ttf);
+}
 
+@font-face {
+  font-family: "narrowMedium";
+  src: url(../public/fonts/din_Medium.ttf);
+}
 
+:root {
+  --narrow: "narrow";
+  --narrowMedium: "narrowMedium";
+}
 
 .separate{
   font-size:1.4em;
