@@ -67,7 +67,6 @@ export default {
 /* Global Styles */
 
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap");
 
 @font-face {
   font-family: "narrow";

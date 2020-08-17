@@ -411,7 +411,7 @@ input[type="text"] {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  font-family: "Sarabun", sans-serif;
+  font-family: var(--narrow);
   font-weight: 500;
   color: #94154b;
   font-size: 3.5em;
