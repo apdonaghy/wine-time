@@ -4,7 +4,7 @@
     
       <transition name="fade" v-if="addedNotice">
         <div class="higher" >
-        <span class="higherText">Wine added to collection</span>
+        <span class="higherText">Added to collection</span>
             </div>
       </transition>
 
@@ -431,7 +431,7 @@ h2 {
   font-family: var(--narrowMedium);
   font-weight: 600;
   color:#94154b;
-  /* line-height: 1.3; */
+  line-height: 1.3;
   padding: 0.6em 1.4em 0.2em 0em;
   background-color: transparent;
   background-image: url("../assets/arrow.svg");
