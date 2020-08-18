@@ -56,7 +56,7 @@
               MAX PRICE
               <strong class="fiveHundred">$</strong>
             </label>
-            <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
+            <input autocomplete="off" id="max-price" name="max-price" type="text" v-model="maxPrice" />
           </div>
           <button @click="googleClick" type="submit" class="form-labels searchWord searchButton">         
               <font-awesome-icon class="search-icon" icon="search" />
