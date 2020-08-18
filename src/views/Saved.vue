@@ -3,6 +3,7 @@
   <div id="Saved" class="saved">
     <div class="container wine-list">
     <h2>Wine Collection</h2>
+    <span v-if="$store.wine_collection.collection.length === 0" class="wineCollectionNote">Use the <strong>add to collection</strong> button next to each wine to build a list of your favorite wines.</span>
     <ol v-if="$store.wine_collection.collection.length > 0">
       <li v-for="(wine, index) of $store.wine_collection.collection" :key="index">
         <a :href="wine.link" target="_blank">{{wine.title}}</a> <font-awesome-icon class="exit" @click="$store.wine_collection.removeItem(wine)" icon="times" />
@@ -74,7 +75,7 @@ h2{
   font-size:2rem;
   font-weight:400;
   border-bottom:5px solid #94154b;
-  margin-bottom:60px;
+  margin-bottom:6%;
 }
 
 ol:last-child{
@@ -93,13 +94,14 @@ ol:last-child{
 @media screen and (max-width: 1100px) {
   .wine-list {
     max-width: 800px;
+    padding-left:20px;
+    padding-right:20px;
   }
 }
 
 @media screen and (max-width: 750px) {
    .wine-list {
     max-width: 550px;
-    padding:20px
   }
   }
 
@@ -142,6 +144,12 @@ ol:last-child{
   position: relative;
   cursor: pointer;
   text-align: center;
+}
+
+.wineCollectionNote{
+ font-family: "Abhaya Libre", serif;
+  color:gray;
+  font-size: 1.5em;
 }
 
 </style>

@@ -108,6 +108,7 @@ export default {
 
 span.closebtn{
   color: #a9a9a9;
+  cursor: pointer;
 }
 
 span.closebtn:hover{

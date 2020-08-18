@@ -1,7 +1,15 @@
 <template>
   <div id="Home">
     <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
-    <div>
+    
+      <transition name="fade" v-if="addedNotice">
+        <div class="higher" >
+        <span class="higherText">Wine added to collection</span>
+            </div>
+      </transition>
+
+
+    <div class="lower">
       <form v-on:submit.prevent="findWine" class="container">
         <p
           class="ab-test"
@@ -50,11 +58,9 @@
             </label>
             <input id="max-price" name="max-price" type="text" v-model="maxPrice" />
           </div>
-          <button @click="googleClick" type="submit" class="form-labels searchWord">          
-          
+          <button @click="googleClick" type="submit" class="form-labels searchWord searchButton">         
               <font-awesome-icon class="search-icon" icon="search" />
               SEARCH
-   
           </button>
         </div>
       </form>
@@ -69,10 +75,10 @@
       <ul v-if="results && results.length > 0">
         <div class="container">
           <p class="filter-text">FILTER</p>
-          <button class="filter-btn" @click="high">$ high to low</button>
-          <button class="filter-btn" @click="low">$ low to high</button>
-          <button class="filter-btn" @click="highestRatings">Highest Rated</button>
-          <button class="filter-btn" @click="mostRatings">Rating Count</button>
+          <button :class="{filterBtnPressed: filter1}" class="filter-btn" @click="high">$ high to low</button>
+          <button :class="{filterBtnPressed: filter2}" class="filter-btn" @click="low">$ low to high</button>
+          <button :class="{filterBtnPressed: filter3}" class="filter-btn" @click="highestRatings">Highest Rated</button>
+          <button :class="{filterBtnPressed: filter4}" class="filter-btn" @click="mostRatings">Rating Count</button>
         </div>
 
         <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
@@ -88,10 +94,12 @@
               <span class="price flex">
                 ${{item.price}} |
                 <a class="purchase" target="_blank" :href="item.link">PURCHASE</a> |
+                <div @click="showAddNotice" class="inline">
                 <span
                   @click="$store.wine_collection.addToCollection(item)"
                   class="collection_btn"
                 >Add to collection +</span>
+                </div>
               </span>
               <span class="rating">
                 Rating
@@ -132,7 +140,12 @@ export default {
       errors: [],
       wine: "", //v-model in form above populates this value with user input on submit
       maxPrice: "", //v-model connects this value to the user input for their desired price point
-      spin: false //sets the spinner to visibility hidden initially
+      spin: false, //sets the spinner to visibility hidden initially
+      addedNotice: false,
+      filter1: false,
+      filter2: false,
+      filter3: false,
+      filter4: false,
     };
   },
   methods: {
@@ -157,6 +170,10 @@ export default {
             (this.spin = false), this.errors.push(error);
           });
     },
+    showAddNotice: function(){
+    this.addedNotice = true;
+     setTimeout(() => this.addedNotice = false, 500);
+    },
     // google analytics click event goal
     googleClick() {
       this.$ga.event({
@@ -168,21 +185,38 @@ export default {
     },
     // code for filters
     high() {
+      this.filter1 = true;
+      this.filter2 = false;
+      this.filter3 = false;
+      this.filter4 = false;
       return this.results.sort(function(a, b) {
         return b.price - a.price;
       });
+
     },
     low() {
+      this.filter1 = false;
+      this.filter2 = true;
+      this.filter3 = false;
+      this.filter4 = false;
       return this.results.sort(function(a, b) {
         return a.price - b.price;
       });
     },
     highestRatings() {
+      this.filter1 = false;
+      this.filter2 = false;
+      this.filter3 = true;
+      this.filter4 = false;
       return this.results.sort(function(a, b) {
         return b.averageRating - a.averageRating;
       });
     },
     mostRatings() {
+      this.filter1 = false;
+      this.filter2 = false;
+      this.filter3 = false;
+      this.filter4 = true;
       return this.results.sort(function(a, b) {
         return b.ratingCount - a.ratingCount;
       });
@@ -272,6 +306,42 @@ ul {
   margin: 0 auto;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+
+.lower{
+  position: relative;
+  z-index: 0;
+}
+
+.higher{
+  width:12em;
+  height:2em;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 2;
+  font-family: "Abhaya Libre", serif;
+  font-size:2em;
+}
+
+.higherText{
+  background:#94154b;
+  box-shadow: 0px 0px 10px rgb(172, 172, 172);
+  padding:5px 15px 5px 15px;
+  border-radius:10px;
+  color:white;
+
+}
+
 .rule {
   height: 1.15em;
   background-color: #94154b;
@@ -279,7 +349,7 @@ ul {
 
 p {
   font-family: "Open Sans", sans-serif;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 1.25em;
   line-height: 1.5em;
 }
@@ -293,6 +363,10 @@ p {
   color: #94154b;
   padding: 5px 0px 5px 5px;
   margin-top: 5px;
+}
+
+.inline{
+  display:inline-block;
 }
 
 .inside-rating {
@@ -411,19 +485,21 @@ input[type="text"] {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  font-family: var(--narrow);
+  font-family: var(--narrowMedium);
   font-weight: 500;
   color: #94154b;
-  font-size: 3.5em;
+  font-size: 3.75em;
+  line-height: 1.05em;
   width: 1.75em;
-  margin-bottom:1em;
+  /* padding-top:10px; */
+  /* margin-bottom:1em; */
 }
 
 .fiveHundred {
   font-weight: 500;
 }
 
-button {
+.searchButton {
   background-color: transparent;
   border: 4px #94154b solid;
   height: 1.7em;
@@ -435,7 +511,7 @@ button {
 
 }
 
-button:hover {
+.searchButton:hover {
   color:white;
   background-color: #94154b;
   transition: .3s;
@@ -478,12 +554,27 @@ button:hover {
   font-weight: 400;
   color: #6a6a6a;
   font-size: 0.9em;
+  cursor: pointer;
+  margin-bottom:15px;
 }
 
 .filter-text {
   display: inline-block;
   margin-right: 15px;
+  margin-bottom:10px;
 }
+
+.filter-btn:hover, .filter-btn:focus {
+  background:#94154b;
+  color:white;
+transition: .3s;
+}
+
+.filterBtnPressed{
+  background:#94154b;
+  color:white;
+}
+
 
 .spinner {
   display: block;
@@ -502,6 +593,15 @@ button:hover {
   }
 }
 
+@media screen and (max-width: 1200px) {
+    .form-labels {
+    font-size:3em;
+  }
+    .select-css {
+    font-size: 2em;
+  }
+}
+
 @media screen and (max-width: 1100px) {
   .flex-container {
     flex-wrap: wrap;
@@ -514,7 +614,7 @@ button:hover {
     margin-bottom: 50px;
   }
   button {
-    margin-top: 10px;
+    margin-top: -10px;
   }
 
   .wine-container {
@@ -539,18 +639,33 @@ button:hover {
   .filter-text {
     display: block;
   }
+
 }
 
+
 @media screen and (max-width: 879px) {
-  button {
+  .searchButton {
     margin-left: 0em;
+    display:block;
+    height:2em;
+    width:60%;
+    margin-top:1em;
   }
   .form-labels {
-    font-size:2.25em;
+    font-size:2.5em;
   }
+
+  input[type="text"] {
+    font-size:2.5em;
+  }
+
 }
 
 @media screen and (max-width: 650px) {
+  .higher{
+  font-size:1.25em;
+  }
+
   .spinner {
     display: block;
     margin: 0 auto;
@@ -591,6 +706,9 @@ button:hover {
   .flex-container {
     margin-bottom: 0px;
   }
+    .searchButton {
+    width:80%;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -616,7 +734,12 @@ button:hover {
     display: block;
     font-size: 1.4em;
   }
+  .searchButton {
+    width:100%;
+  }
 }
+
+
 </style>
 
 
