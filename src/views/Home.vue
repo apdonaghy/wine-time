@@ -75,10 +75,10 @@
       <ul v-if="results && results.length > 0">
         <div class="container">
           <p class="filter-text">FILTER</p>
-          <button :class="{filterBtnPressed: filter1}" class="filter-btn" @click="high">$ high to low</button>
-          <button :class="{filterBtnPressed: filter2}" class="filter-btn" @click="low">$ low to high</button>
-          <button :class="{filterBtnPressed: filter3}" class="filter-btn" @click="highestRatings">Highest Rated</button>
-          <button :class="{filterBtnPressed: filter4}" class="filter-btn" @click="mostRatings">Rating Count</button>
+          <button :class="{filterBtnPressed: filter1}" class="filter-btn" @click="high" @keyup.tab="high">$ high to low</button>
+          <button :class="{filterBtnPressed: filter2}" class="filter-btn" @click="low" @keyup.tab="low">$ low to high</button>
+          <button :class="{filterBtnPressed: filter3}" class="filter-btn" @click="highestRatings" @keyup.tab="highestRatings">Highest Rated</button>
+          <button :class="{filterBtnPressed: filter4}" class="filter-btn" @click="mostRatings" @keyup.tab="mostRatings">Rating Count</button>
         </div>
 
         <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
@@ -150,6 +150,10 @@ export default {
   },
   methods: {
     findWine: function() {
+      this.filter1 = false;
+      this.filter2 = false;
+      this.filter3 = false;
+      this.filter4 = false;
       (this.spin = true), //shows spinner during API request
         axios
           .get("https://api.spoonacular.com/food/wine/recommendation", {
@@ -556,6 +560,14 @@ input[type="text"] {
   font-size: 0.9em;
   cursor: pointer;
   margin-bottom:15px;
+}
+
+.filter-btn:focus {
+  outline:none;
+  border-radius: 15px;
+  border:2px solid dodgerblue;
+  transition:.3s;
+  
 }
 
 .filter-text {
