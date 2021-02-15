@@ -532,7 +532,7 @@ input[type="text"] {
   text-align: center;
   font-weight: 100;
   font-size: 2em;
-  padding: 80px 0px 90px 0;
+  padding: 120px 0px 90px 0;
   color: #94154b;
   font-family: "Abhaya Libre", serif;
   max-width: 20em;
