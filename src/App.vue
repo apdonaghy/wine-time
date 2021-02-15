@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="grey">
+    <div class="navStyle">
       <!-- Global nav -->
       <nav class="flex-containerNav">
         <h1 class="ninety">
@@ -97,6 +97,14 @@ export default {
 ::selection {
   background: black;
   color: white;
+}
+
+.navStyle{
+  background-color:white;
+  box-shadow: 0px 0px 5px #ebebeb;
+  position:fixed;
+  z-index: 3;
+  width:100%;
 }
 
 * {

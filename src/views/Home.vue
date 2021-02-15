@@ -24,7 +24,6 @@
               <option value="cabernet sauvignon">Cabernet Sauvignon</option>
               <option value="merlot">Merlot</option>
               <option value="pinot noir">Pinot Noir</option>
-              <option value="bordeaux">Bordeaux</option>
               <option value="syrah">Syrah</option>
               <option value="malbec">Malbec</option>
               <option value="zinfandel">Zinfandel</option>
