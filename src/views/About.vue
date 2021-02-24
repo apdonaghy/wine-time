@@ -36,7 +36,7 @@ h2{
   font-size: 2rem;
   line-height: 1.3em;
   color: #94154b;
-  padding: 7% 10px 5% 10px;
+  padding: 12% 10px 5% 10px;
   margin: auto;
   max-width: 1460px;
 }
@@ -71,6 +71,7 @@ a:hover {
 
 @media screen and (max-width: 750px) {
   .aboutText {
+    padding-top:22%;
     max-width: 550px;
     font-size: 1.3em;
   }

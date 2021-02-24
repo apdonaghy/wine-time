@@ -49,7 +49,7 @@ ol{
 .wine-list{
   margin:0 auto;
   max-width: 1460px;
-  padding-top:8%;
+  padding-top:12%;
  
 }
 
@@ -101,6 +101,7 @@ ol:last-child{
 
 @media screen and (max-width: 750px) {
    .wine-list {
+     padding-top:22%;
     max-width: 550px;
   }
   }
