@@ -3,10 +3,10 @@
   <div id="Saved" class="saved">
     <div class="container wine-list">
     <h2>Wine Collection</h2>
-    <span v-if="$store.wine_collection.collection.length === 0" class="wineCollectionNote">Use the <strong>add to collection</strong> button next to each wine to build a list of your favorite wines.</span>
-    <ol v-if="$store.wine_collection.collection.length > 0">
-      <li v-for="(wine, index) of $store.wine_collection.collection" :key="index">
-        <a :href="wine.link" target="_blank">{{wine.title}}</a> <font-awesome-icon class="exit" @click="$store.wine_collection.removeItem(wine)" icon="times" />
+    <span v-if="favorites.length === 0" class="wineCollectionNote">Use the <strong>add to collection</strong> button next to each wine to build a list of your favorite wines.</span>
+    <ol v-if="favorites.length > 0">
+      <li v-for="(wine, index) of favorites" :key="index">
+        <a :href="wine.link" target="_blank">{{wine.title}}</a> <font-awesome-icon class="exit" @click="$emit('removeWine', wine)" icon="times" />
       </li>
     </ol>
     </div>
@@ -16,11 +16,13 @@
 
 <script>
 export default {
+  props:['favorites'],
   data() {
     return {
       close: false
     };
   }
+
 };
 </script>
 

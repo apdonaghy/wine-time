@@ -57,7 +57,7 @@
             </label>
             <input autocomplete="off" id="max-price" name="max-price" type="text" v-model="maxPrice" />
           </div>
-          <button @click="googleClick" type="submit" class="form-labels searchWord searchButton">         
+          <button type="submit" class="form-labels searchWord searchButton">         
               <font-awesome-icon class="search-icon" icon="search" />
               SEARCH
           </button>
@@ -95,7 +95,7 @@
                 <a class="purchase" target="_blank" :href="item.link">PURCHASE</a> |
                 <div @click="showAddNotice" class="inline">
                 <span
-                  @click="$store.wine_collection.addToCollection(item)"
+                  @click="$emit('saveWine', item)"
                   class="collection_btn"
                 >Add to collection +</span>
                 </div>
@@ -130,62 +130,40 @@
 </template>
 
 <script>
-import axios from "axios";
+
 export default {
   name: "Home", //router
+  props: ["results", "spin", "favorites", "errors"],
   data() {
     return {
-      results: null,
-      errors: [],
-      wine: "", //v-model in form above populates this value with user input on submit
-      maxPrice: "", //v-model connects this value to the user input for their desired price point
-      spin: false, //sets the spinner to visibility hidden initially
       addedNotice: false,
+      wine: "", 
+      maxPrice: "", 
       filter1: false,
       filter2: false,
       filter3: false,
       filter4: false,
+      spinning: true
     };
   },
   methods: {
     findWine: function() {
+      this.$emit("apiCall", {
+        maxPrice: this.maxPrice,
+        wine:this.wine,
+        spinning: this.spinning
+      }),
       this.filter1 = false;
       this.filter2 = false;
       this.filter3 = false;
       this.filter4 = false;
-      (this.spin = true), //shows spinner during API request
-        axios
-          .get("https://api.spoonacular.com/food/wine/recommendation", {
-            params: {
-              wine: this.wine, //dynamically adds the user's choice to the API request
-              number: 18,
-              minRating: 0.8,
-              maxPrice: this.maxPrice, //dynamically adds the users choice to the API request
-              apiKey: "2c010ee91b164e24a2c25a653e110615" //apply for a unique API key at spoonacular.com
-            }
-          })
-          .then(response => {
-            //API response
-            this.results = this.processData(response.data.recommendedWines);
-            this.spin = false; //turns off visibility of spinner when response has loaded
-          })
-          .catch(error => {
-            (this.spin = false), this.errors.push(error);
-          });
+      //shows spinner during API request
     },
     showAddNotice: function(){
     this.addedNotice = true;
      setTimeout(() => this.addedNotice = false, 500);
     },
     // google analytics click event goal
-    googleClick() {
-      this.$ga.event({
-        eventCategory: "mainApp",
-        eventAction: "click",
-        eventLabel: "wine_click",
-        eventValue: 1
-      });
-    },
     // code for filters
     high() {
       this.filter1 = true;
