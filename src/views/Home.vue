@@ -9,7 +9,10 @@
       </transition>
 
 
+
     <div class="lower">
+
+        
       <form v-on:submit.prevent="findWine" class="container">
         <p
           class="ab-test"
@@ -63,6 +66,8 @@
           </button>
         </div>
       </form>
+
+      <!-- <Accordion></Accordion> -->
 
       <!-- font awesome spinner -->
       <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
@@ -130,10 +135,14 @@
 </template>
 
 <script>
+// import Accordion from '../components/Accordion.vue';
 
 export default {
   name: "Home", //router
   props: ["results", "spin", "favorites", "errors"],
+  // components: {
+  //   Accordion,
+  // },
   data() {
     return {
       addedNotice: false,
