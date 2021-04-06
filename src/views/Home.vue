@@ -67,7 +67,10 @@
         </div>
       </form>
 
-      <!-- <Accordion></Accordion> -->
+      <!-- <Accordion v-bind:wineNames="reds"></Accordion>
+       <Accordion v-bind:wineNames="white"></Accordion>
+       <Accordion v-bind:wineNames="sparkling"></Accordion> -->
+   
 
       <!-- font awesome spinner -->
       <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
@@ -152,7 +155,10 @@ export default {
       filter2: false,
       filter3: false,
       filter4: false,
-      spinning: true
+      spinning: true,
+      reds:['Merlot', 'Cabernet Sauvignon', 'Syrah', 'Pinot Noir', 'Malbec', 'Zinfandel'],
+      white:['Pinot Grigio', 'Chardonnay', 'Sauvignon blanc', 'Pinot Gris'],
+      sparkling:['Champagne', 'Cava', 'Prosecco', 'Sparkling Wine']
     };
   },
   methods: {
