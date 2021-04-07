@@ -1,13 +1,24 @@
 <template>
   <div>
-    <form action="#">
+    <form :ref="wineNames.wineTitle">
       <div class="container">
-        <!-- <h1></h1> -->
+        <h3>{{ wineNames.wineTitle }}</h3>
         <span class="toggle" @click="toggle">v</span>
-        <div class="open"  v-bind:style="{ maxHeight: computedHeight }" ref="open">
-          <p v-for="(wine, index) in wineNames" :key="index">
-            <input @click="initiate" type="radio" :id="wine" ref="wine" :value="wine" name="radio-group" checked />
-            <label :for="wine">{{wine}}</label>
+        <div
+          class="open"
+          v-bind:style="{ maxHeight: computedHeight }"
+          ref="open"
+        >
+          <p v-for="(wine, index) in wineNames.wineList" :key="index">
+            <input
+              type="radio"
+              v-model="checked.inputVal"
+              :id="wine"
+              :value="wine"
+              name="radio-group"
+              @click="initiate"
+            />
+            <label :for="wine">{{ wine }}</label>
           </p>
         </div>
       </div>
@@ -22,13 +33,17 @@ export default {
     return {
       active: false,
       maxHeight: "0px",
+      checked: {
+        inputVal: null,
+        currentTitle: this.wineNames.wineTitle
+      },
     };
   },
-  props:['wineNames'],
+  props: ["wineNames"],
   computed: {
     computedHeight: function () {
       return this.maxHeight;
-    },
+    }
   },
   methods: {
     toggle() {
@@ -40,9 +55,12 @@ export default {
         this.active = false;
       }
     },
-    initiate(){
-      console.log(this.$refs.wine.value)
-    }
+    clear(){
+      this.$refs[this.wineNames.wineTitle].reset()
+    },
+    initiate() {
+      setTimeout(() => this.$emit("checkedData", this.checked), 10);
+    },
   },
 };
 </script>

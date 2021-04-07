@@ -1,29 +1,31 @@
 <template>
   <div id="Home">
     <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
-    
-      <transition name="fade" v-if="addedNotice">
-        <div class="higher" >
+
+    <transition name="fade" v-if="addedNotice">
+      <div class="higher">
         <span class="higherText">Added to collection</span>
-            </div>
-      </transition>
-
-
+      </div>
+    </transition>
 
     <div class="lower">
-
-        
       <form v-on:submit.prevent="findWine" class="container">
-        <p
-          class="ab-test"
-        >Select a wine and your max-price per bottle, then search to see a list of recommended wines</p>
+        <p class="ab-test">
+          Select a wine and your max-price per bottle, then search to see a list
+          of recommended wines
+        </p>
         <div class="flex-container margin-bottom">
           <div>
             <label for="redWine" class="form-labels">
               RED
               <i class="fas fa-angle-down"></i>
             </label>
-            <select v-model="wine" name="redWine" id="redWine" class="select-css">
+            <select
+              v-model="wine"
+              name="redWine"
+              id="redWine"
+              class="select-css"
+            >
               <option value="cabernet sauvignon">Cabernet Sauvignon</option>
               <option value="merlot">Merlot</option>
               <option value="pinot noir">Pinot Noir</option>
@@ -34,7 +36,12 @@
           </div>
           <div>
             <label for="whiteWine" class="form-labels">WHITE</label>
-            <select v-model="wine" name="whiteWine" id="whiteWine" class="select-css">
+            <select
+              v-model="wine"
+              name="whiteWine"
+              id="whiteWine"
+              class="select-css"
+            >
               <option value="pinot grigio">Pinot Grigio</option>
               <option value="chardonnay">Chardonnay</option>
               <option value="sauvignon blanc">Sauvignon blanc</option>
@@ -43,7 +50,12 @@
           </div>
           <div>
             <label for="sparklingWine" class="form-labels">SPARKLING</label>
-            <select v-model="wine" name="sparklingWine" id="sparklingWine" class="select-css">
+            <select
+              v-model="wine"
+              name="sparklingWine"
+              id="sparklingWine"
+              class="select-css"
+            >
               <option value="champagne">Champagne</option>
               <option value="cava">Cava</option>
               <option value="prosecco">Prosecco</option>
@@ -58,22 +70,43 @@
               MAX PRICE
               <strong class="fiveHundred">$</strong>
             </label>
-            <input autocomplete="off" id="max-price" name="max-price" type="text" v-model="maxPrice" />
+            <input
+              autocomplete="off"
+              id="max-price"
+              name="max-price"
+              type="text"
+              v-model="maxPrice"
+            />
           </div>
-          <button type="submit" class="form-labels searchWord searchButton">         
-              <font-awesome-icon class="search-icon" icon="search" />
-              SEARCH
+          <button type="submit" class="form-labels searchWord searchButton">
+            <font-awesome-icon class="search-icon" icon="search" />
+            SEARCH
           </button>
         </div>
       </form>
 
-      <!-- <Accordion v-bind:wineNames="reds"></Accordion>
-       <Accordion v-bind:wineNames="white"></Accordion>
-       <Accordion v-bind:wineNames="sparkling"></Accordion> -->
-   
+      <!-- <Accordion
+        ref="red"
+        v-on:checkedData="onChildClick"
+        v-bind:wineNames="reds"
+      ></Accordion>
+      <Accordion
+        ref="white"
+        v-on:checkedData="onChildClick"
+        v-bind:wineNames="white"
+      ></Accordion>
+      <Accordion
+        ref="sparkling"
+        v-on:checkedData="onChildClick"
+        v-bind:wineNames="sparkling"
+      ></Accordion> -->
 
       <!-- font awesome spinner -->
-      <font-awesome-icon v-show="spin" class="fa-spin spinner" icon="circle-notch" />
+      <font-awesome-icon
+        v-show="spin"
+        class="fa-spin spinner"
+        icon="circle-notch"
+      />
       <div v-if="results && results.length > 0" class="rule"></div>
     </div>
     <!-- container for formatted api response -->
@@ -82,63 +115,99 @@
       <ul v-if="results && results.length > 0">
         <div class="container">
           <p class="filter-text">FILTER</p>
-          <button :class="{filterBtnPressed: filter1}" class="filter-btn" @click="high" @keyup.tab="high">$ high to low</button>
-          <button :class="{filterBtnPressed: filter2}" class="filter-btn" @click="low" @keyup.tab="low">$ low to high</button>
-          <button :class="{filterBtnPressed: filter3}" class="filter-btn" @click="highestRatings" @keyup.tab="highestRatings">Highest Rated</button>
-          <button :class="{filterBtnPressed: filter4}" class="filter-btn" @click="mostRatings" @keyup.tab="mostRatings">Rating Count</button>
+          <button
+            :class="{ filterBtnPressed: filter1 }"
+            class="filter-btn"
+            @click="high"
+            @keyup.tab="high"
+          >
+            $ high to low
+          </button>
+          <button
+            :class="{ filterBtnPressed: filter2 }"
+            class="filter-btn"
+            @click="low"
+            @keyup.tab="low"
+          >
+            $ low to high
+          </button>
+          <button
+            :class="{ filterBtnPressed: filter3 }"
+            class="filter-btn"
+            @click="highestRatings"
+            @keyup.tab="highestRatings"
+          >
+            Highest Rated
+          </button>
+          <button
+            :class="{ filterBtnPressed: filter4 }"
+            class="filter-btn"
+            @click="mostRatings"
+            @keyup.tab="mostRatings"
+          >
+            Rating Count
+          </button>
         </div>
 
         <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
-        <li v-for="item of results" class="wine-container container" :key="item.id">
+        <li
+          v-for="item of results"
+          class="wine-container container"
+          :key="item.id"
+        >
           <div class="flex-container">
             <div class="twentyFive">
               <img class="img" :src="item.imageUrl" :alt="item.title" />
             </div>
             <div class="seventyFive">
               <h2>
-                <strong>{{item.title}}</strong>
+                <strong>{{ item.title }}</strong>
               </h2>
               <span class="price flex">
-                ${{item.price}} |
-                <a class="purchase" target="_blank" :href="item.link">PURCHASE</a> |
+                ${{ item.price }} |
+                <a class="purchase" target="_blank" :href="item.link"
+                  >PURCHASE</a
+                >
+                |
                 <div @click="showAddNotice" class="inline">
-                <span
-                  @click="$emit('saveWine', item)"
-                  class="collection_btn"
-                >Add to collection +</span>
+                  <span @click="$emit('saveWine', item)" class="collection_btn"
+                    >Add to collection +</span
+                  >
                 </div>
               </span>
               <span class="rating">
                 Rating
-                <span class="inside-rating">{{ Math.floor(item.averageRating * 100) }}%</span>
+                <span class="inside-rating"
+                  >{{ Math.floor(item.averageRating * 100) }}%</span
+                >
               </span>
               <span class="ratings">
                 Ratings
                 <strong>x {{ Math.floor(item.ratingCount) }}</strong>
               </span>
 
-              <p>{{item.description}}</p>
+              <p>{{ item.description }}</p>
             </div>
           </div>
         </li>
       </ul>
 
       <!-- If the API doesn't return result from a properly filled out form -->
-      <div v-else-if="results && results.length==0" class="no-results">
+      <div v-else-if="results && results.length == 0" class="no-results">
         <h2>No Wines Found</h2>
         <p>Please adjust your search</p>
       </div>
 
       <!-- If the API can't return data because the form was filled out improperly -->
       <ul v-if="errors && errors.length > 0" class="errors">
-        <li v-for="error of errors" :key="error">{{error.message}}</li>
+        <li v-for="error of errors" :key="error">{{ error.message }}</li>
       </ul>
     </main>
   </div>
 </template>
 
 <script>
-// import Accordion from '../components/Accordion.vue';
+// import Accordion from "../components/Accordion.vue";
 
 export default {
   name: "Home", //router
@@ -149,34 +218,54 @@ export default {
   data() {
     return {
       addedNotice: false,
-      wine: "", 
-      maxPrice: "", 
+      wine: "",
+      maxPrice: "",
+      currentList: null,
       filter1: false,
       filter2: false,
       filter3: false,
       filter4: false,
       spinning: true,
-      reds:['Merlot', 'Cabernet Sauvignon', 'Syrah', 'Pinot Noir', 'Malbec', 'Zinfandel'],
-      white:['Pinot Grigio', 'Chardonnay', 'Sauvignon blanc', 'Pinot Gris'],
-      sparkling:['Champagne', 'Cava', 'Prosecco', 'Sparkling Wine']
+      reds: {
+        wineTitle: "Red",
+        wineList: [
+          "Merlot",
+          "Cabernet Sauvignon",
+          "Syrah",
+          "Pinot Noir",
+          "Malbec",
+          "Zinfandel",
+        ],
+      },
+      white: {
+        wineTitle: "White",
+        wineList: ["Pinot Grigio", "Chardonnay", "Sauvignon blanc"],
+      },
+      sparkling: {
+        wineTitle: "Sparkling",
+        wineList: ["Champagne", "Cava", "Prosecco", "Sparkling Wine"],
+      },
     };
   },
   methods: {
-    findWine: function() {
+    findWine: function () {
       this.$emit("apiCall", {
         maxPrice: this.maxPrice,
-        wine:this.wine,
-        spinning: this.spinning
+        wine: this.wine,
+        spinning: this.spinning,
       }),
-      this.filter1 = false;
+        (this.filter1 = false);
       this.filter2 = false;
       this.filter3 = false;
       this.filter4 = false;
       //shows spinner during API request
     },
-    showAddNotice: function(){
-    this.addedNotice = true;
-     setTimeout(() => this.addedNotice = false, 500);
+    resetForm: function (event) {
+      console.log(event.target);
+    },
+    showAddNotice: function () {
+      this.addedNotice = true;
+      setTimeout(() => (this.addedNotice = false), 500);
     },
     // google analytics click event goal
     // code for filters
@@ -185,17 +274,37 @@ export default {
       this.filter2 = false;
       this.filter3 = false;
       this.filter4 = false;
-      return this.results.sort(function(a, b) {
+      return this.results.sort(function (a, b) {
         return b.price - a.price;
       });
+    },
+    onChildClick(value) {
+      this.wine = value.inputVal;
+      this.currentList = value.currentTitle;
+      if (this.currentList === "Red") {
+        this.$refs.white.clear();
+        this.$refs.sparkling.clear();
+      } else if (this.currentList === "White") {
+        this.$refs.red.clear();
+        this.$refs.sparkling.clear();
+      } else if (this.currentList === "Sparkling") {
+        this.$refs.white.clear();
+        this.$refs.red.clear();
+      }
 
+      this.$emit("apiCall", {
+        maxPrice: this.maxPrice,
+        wine: this.wine,
+        spinning: this.spinning,
+      });
+      //  console.log(this.$refs.red)
     },
     low() {
       this.filter1 = false;
       this.filter2 = true;
       this.filter3 = false;
       this.filter4 = false;
-      return this.results.sort(function(a, b) {
+      return this.results.sort(function (a, b) {
         return a.price - b.price;
       });
     },
@@ -204,7 +313,7 @@ export default {
       this.filter2 = false;
       this.filter3 = true;
       this.filter4 = false;
-      return this.results.sort(function(a, b) {
+      return this.results.sort(function (a, b) {
         return b.averageRating - a.averageRating;
       });
     },
@@ -213,19 +322,19 @@ export default {
       this.filter2 = false;
       this.filter3 = false;
       this.filter4 = true;
-      return this.results.sort(function(a, b) {
+      return this.results.sort(function (a, b) {
         return b.ratingCount - a.ratingCount;
       });
     },
 
     //This function takes each index in the results array and changes the results.price from a string to a number so that filter methods can compare them properly.
-    processData: function(dataArr) {
+    processData: function (dataArr) {
       for (let data in dataArr) {
         dataArr[data].price = parseFloat(dataArr[data].price.substring(1));
       }
       return dataArr;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -302,22 +411,22 @@ ul {
   margin: 0 auto;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .3s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 
-
-.lower{
+.lower {
   position: relative;
   z-index: 0;
 }
 
-.higher{
-  width:12em;
-  height:2em;
+.higher {
+  width: 12em;
+  height: 2em;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -326,16 +435,15 @@ ul {
   margin: auto;
   z-index: 2;
   font-family: "Abhaya Libre", serif;
-  font-size:2em;
+  font-size: 2em;
 }
 
-.higherText{
-  background:#94154b;
+.higherText {
+  background: #94154b;
   box-shadow: 0px 0px 10px rgb(172, 172, 172);
-  padding:5px 15px 5px 15px;
-  border-radius:10px;
-  color:white;
-
+  padding: 5px 15px 5px 15px;
+  border-radius: 10px;
+  color: white;
 }
 
 .rule {
@@ -361,8 +469,8 @@ p {
   margin-top: 5px;
 }
 
-.inline{
-  display:inline-block;
+.inline {
+  display: inline-block;
 }
 
 .inside-rating {
@@ -426,7 +534,7 @@ h2 {
   font-size: 2.35em;
   font-family: var(--narrowMedium);
   font-weight: 600;
-  color:#94154b;
+  color: #94154b;
   line-height: 1.3;
   padding: 0.6em 1.4em 0.2em 0em;
   background-color: transparent;
@@ -441,7 +549,7 @@ h2 {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  margin-bottom:1em;
+  margin-bottom: 1em;
 }
 .select-css::-ms-expand {
   color: #94154b;
@@ -465,7 +573,6 @@ h2 {
   font-weight: 100;
   color: #94154b;
   font-size: 3.7em;
-
 }
 
 form {
@@ -500,26 +607,21 @@ input[type="text"] {
   border: 4px #94154b solid;
   height: 1.7em;
   cursor: pointer;
-  padding-left:.3em;
-  padding-right: .3em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
   margin-top: -9px;
-  margin-left:.5em;
-
+  margin-left: 0.5em;
 }
 
 .searchButton:hover {
-  color:white;
+  color: white;
   background-color: #94154b;
-  transition: .3s;
+  transition: 0.3s;
 }
 
-
-.search-icon{
-  padding-right: .1em;
+.search-icon {
+  padding-right: 0.1em;
 }
-
-
-
 
 .ab-test {
   text-align: center;
@@ -551,34 +653,33 @@ input[type="text"] {
   color: #6a6a6a;
   font-size: 0.9em;
   cursor: pointer;
-  margin-bottom:15px;
+  margin-bottom: 15px;
 }
 
 .filter-btn:focus {
-  outline:none;
+  outline: none;
   border-radius: 15px;
-  border:2px solid dodgerblue;
-  transition:.3s;
-  
+  border: 2px solid dodgerblue;
+  transition: 0.3s;
 }
 
 .filter-text {
   display: inline-block;
   margin-right: 15px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
-.filter-btn:hover, .filter-btn:focus {
-  background:#94154b;
-  color:white;
-transition: .3s;
+.filter-btn:hover,
+.filter-btn:focus {
+  background: #94154b;
+  color: white;
+  transition: 0.3s;
 }
 
-.filterBtnPressed{
-  background:#94154b;
-  color:white;
+.filterBtnPressed {
+  background: #94154b;
+  color: white;
 }
-
 
 .spinner {
   display: block;
@@ -598,10 +699,10 @@ transition: .3s;
 }
 
 @media screen and (max-width: 1200px) {
-    .form-labels {
-    font-size:3em;
+  .form-labels {
+    font-size: 3em;
   }
-    .select-css {
+  .select-css {
     font-size: 2em;
   }
 }
@@ -643,31 +744,28 @@ transition: .3s;
   .filter-text {
     display: block;
   }
-
 }
-
 
 @media screen and (max-width: 879px) {
   .searchButton {
     margin-left: 0em;
-    display:block;
-    height:2em;
-    width:60%;
-    margin-top:1em;
+    display: block;
+    height: 2em;
+    width: 60%;
+    margin-top: 1em;
   }
   .form-labels {
-    font-size:2.5em;
+    font-size: 2.5em;
   }
 
   input[type="text"] {
-    font-size:2.5em;
+    font-size: 2.5em;
   }
-
 }
 
 @media screen and (max-width: 650px) {
-  .higher{
-  font-size:1.25em;
+  .higher {
+    font-size: 1.25em;
   }
 
   .spinner {
@@ -692,7 +790,7 @@ transition: .3s;
     display: block;
     font-size: 1.7em;
     margin: 0 auto;
-    margin-bottom:1.2em;
+    margin-bottom: 1.2em;
   }
   h2 {
     font-size: 2.25em;
@@ -710,8 +808,8 @@ transition: .3s;
   .flex-container {
     margin-bottom: 0px;
   }
-    .searchButton {
-    width:80%;
+  .searchButton {
+    width: 80%;
   }
 }
 
@@ -739,11 +837,9 @@ transition: .3s;
     font-size: 1.4em;
   }
   .searchButton {
-    width:100%;
+    width: 100%;
   }
 }
-
-
 </style>
 
 
