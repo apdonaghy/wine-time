@@ -84,7 +84,7 @@
           </button>
         </div>
       </form>
-<!-- 
+
       <section class="filter container">
       <h3 class="filterMainTitle">Filters</h3>
       <Accordion
@@ -105,7 +105,7 @@
         v-on:checkedData="onChildClick"
         v-bind:wineNames="sparkling"
       ></Accordion>
-      </section> -->
+      </section>
 
       <!-- font awesome spinner -->
       <font-awesome-icon
@@ -213,14 +213,14 @@
 </template>
 
 <script>
-// import Accordion from "../components/Accordion.vue";
+import Accordion from "../components/Accordion.vue";
 
 export default {
   name: "Home", //router
   props: ["results", "spin", "favorites", "errors"],
-  // components: {
-  //   Accordion,
-  // },
+  components: {
+    Accordion,
+  },
   data() {
     return {
       addedNotice: false,

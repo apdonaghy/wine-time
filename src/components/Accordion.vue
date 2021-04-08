@@ -2,9 +2,9 @@
   <div>
     <form :ref="wineNames.wineTitle">
       <div class="container">
-        <div class="flexSection">
+        <div @click="toggle" class="flexSection">
         <h3 class="formTitles">{{ wineNames.wineTitle }}</h3>
-        <img class="toggle arrow2" @click="toggle" src="../assets/arrow2.svg" />
+        <img class="toggle arrow2" ref="arrow" src="../assets/arrow2.svg" />
         </div>
         <div
           class="open"
@@ -51,10 +51,12 @@ export default {
     toggle() {
       if (this.active === false) {
         this.maxHeight = this.$refs.open.scrollHeight + "px";
+        this.$refs.arrow.style.transform = 'rotate(180deg)'
         this.active = true;
       } else {
         this.maxHeight = "0px";
         this.active = false;
+        this.$refs.arrow.style.transform = 'rotate(360deg)'
       }
     },
     clear(){
@@ -71,17 +73,20 @@ export default {
 
 .arrow2{
   width:1em;
-   padding-bottom:20px;
+  transition:.3s;
+ 
 }
 
 .flexSection{
   display:flex;
+    padding-bottom:20px;
+    cursor:pointer;
 }
 
 .formTitles{
   font-family: var(--serif);
   margin-right:5px;
-  padding-bottom:20px;
+
   color:var(--brand);
   font-size:1.25em;
 }
@@ -104,7 +109,8 @@ export default {
 }
 
 label:hover {
-  color:var(--brand)
+  color:var(--brand);
+  text-decoration:underline;
 }
 
 [type="radio"]:checked + label:before,
