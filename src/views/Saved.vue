@@ -36,7 +36,7 @@ export default {
 }
 
 .exit:hover{
-  color:#94154b; 
+  color:var(--brand); 
 }
 
 
@@ -63,7 +63,7 @@ a{
 }
 
 a:hover{
-  color: #94154b;
+  color: var(--brand);
 }
 
 li{
@@ -72,11 +72,11 @@ li{
 }
 
 h2{
-  color:#94154b;
+  color:var(--brand);
   font-family: "Abhaya Libre", serif;
   font-size:2rem;
   font-weight:400;
-  border-bottom:5px solid #94154b;
+  border-bottom:5px solid var(--brand);
   margin-bottom:6%;
 }
 

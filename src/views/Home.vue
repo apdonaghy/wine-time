@@ -84,22 +84,28 @@
           </button>
         </div>
       </form>
-
-      <!-- <Accordion
+<!-- 
+      <section class="filter container">
+      <h3 class="filterMainTitle">Filters</h3>
+      <Accordion
+        class="accMargin"
         ref="red"
         v-on:checkedData="onChildClick"
         v-bind:wineNames="reds"
       ></Accordion>
       <Accordion
+        class="accMargin"
         ref="white"
         v-on:checkedData="onChildClick"
         v-bind:wineNames="white"
       ></Accordion>
       <Accordion
+        class="accMargin"
         ref="sparkling"
         v-on:checkedData="onChildClick"
         v-bind:wineNames="sparkling"
-      ></Accordion> -->
+      ></Accordion>
+      </section> -->
 
       <!-- font awesome spinner -->
       <font-awesome-icon
@@ -161,7 +167,7 @@
             </div>
             <div class="seventyFive">
               <h2>
-                <strong>{{ item.title }}</strong>
+               {{ item.title }}
               </h2>
               <span class="price flex">
                 ${{ item.price }} |
@@ -343,7 +349,7 @@ export default {
 /* styling for this specific view */
 
 .redBackground {
-  background-color: #94154b;
+  background-color: var(--brand);
   height: 100vh;
 }
 
@@ -352,15 +358,30 @@ export default {
   align-items: center;
 }
 
+.filter{
+  width:20%;
+}
+
+.filterMainTitle{
+  font-family: var(--sansSerif);
+  font-size:1.25em;
+  margin-bottom:20px;
+   border-bottom: solid 1px rgba(0,0,0,0.1);
+   padding-bottom:10px;
+}
+
+.accMargin{
+  margin-bottom:20px;
+}
 .collection_btn {
   border: none;
   /* background-color:#94154b; */
   color: black;
   /* padding:10px; */
   height: 0em;
-  margin-left: -0.5em;
-  font-family: "Open Sans", sans-serif;
-  font-size: 0.58em;
+  margin-left: -0.6em;
+  font-family: var(--sansSerif);
+  font-size: 0.56em;
   padding: 0 10px 0 10px;
   font-weight: 700;
   cursor: pointer;
@@ -368,12 +389,12 @@ export default {
 }
 
 .collection_btn:hover {
-  color: #94154b;
+  color: var(--brand);
 }
 
 a.purchase {
   font-size: 0.7em;
-  color: #94154b;
+  color: var(--brand);
   text-decoration: none;
 }
 a.purchase:hover {
@@ -434,12 +455,12 @@ ul {
   right: 0;
   margin: auto;
   z-index: 2;
-  font-family: "Abhaya Libre", serif;
+  font-family: var(--serif);
   font-size: 2em;
 }
 
 .higherText {
-  background: #94154b;
+  background: var(--brand);
   box-shadow: 0px 0px 10px rgb(172, 172, 172);
   padding: 5px 15px 5px 15px;
   border-radius: 10px;
@@ -448,23 +469,23 @@ ul {
 
 .rule {
   height: 1.15em;
-  background-color: #94154b;
+  background-color: var(--brand);
 }
 
 p {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 300;
+  font-family: var(--sansSerif);
+  font-weight: 400;
   font-size: 1.25em;
   line-height: 1.5em;
 }
 
 .rating {
-  border: 3.5px #94154b solid;
+  border: 3.5px var(--brand) solid;
   display: inline-block;
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--sansSerif);
   font-size: 1.15em;
   font-weight: 700;
-  color: #94154b;
+  color: var(--brand);
   padding: 5px 0px 5px 5px;
   margin-top: 5px;
 }
@@ -474,15 +495,15 @@ p {
 }
 
 .inside-rating {
-  background-color: #94154b;
+  background-color: var(--brand);
   padding: 8px 4.5px 8px 8px;
   color: white;
   margin: -1px;
 }
 
 .ratings {
-  font-family: "Open Sans", sans-serif;
-  color: #94154b;
+  font-family: var(--sansSerif);
+  color: var(--brand);
   display: block;
   margin-top: 6px;
   margin-bottom: 17px;
@@ -521,7 +542,7 @@ p {
 }
 
 h2 {
-  font-family: "Abhaya Libre", serif;
+  font-family: "Abhaya Libre", serif; 
   font-size: 3em;
   font-weight: 900;
 }
@@ -534,7 +555,7 @@ h2 {
   font-size: 2.35em;
   font-family: var(--narrowMedium);
   font-weight: 600;
-  color: #94154b;
+  color: var(--brand);
   line-height: 1.3;
   padding: 0.6em 1.4em 0.2em 0em;
   background-color: transparent;
@@ -545,14 +566,14 @@ h2 {
   margin: 0;
   border: none;
   border-radius: 0;
-  border-bottom: 4px #94154b solid;
+  border-bottom: 4px var(--brand) solid;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   margin-bottom: 1em;
 }
 .select-css::-ms-expand {
-  color: #94154b;
+  color: var(--brand);
 }
 .select-css:hover {
   border-color: lightgray;
@@ -561,7 +582,7 @@ h2 {
   border-color: lightgray;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
   box-shadow: 0 0 0 3px -moz-mac-focusring;
-  color: #94154b;
+  color: var(--brand);
   outline: none;
 }
 .select-css option {
@@ -571,7 +592,7 @@ h2 {
 .form-labels {
   font-family: var(--narrow);
   font-weight: 100;
-  color: #94154b;
+  color: var(--brand);
   font-size: 3.7em;
 }
 
@@ -581,7 +602,7 @@ form {
 
 input[type="text"] {
   border: none;
-  border-bottom: 4px #94154b solid;
+  border-bottom: 4px var(--brand) solid;
   /* text-decoration: underline; */
   background-image: none;
   background-color: transparent;
@@ -590,7 +611,7 @@ input[type="text"] {
   box-shadow: none;
   font-family: var(--narrowMedium);
   font-weight: 500;
-  color: #94154b;
+  color: var(--brand);
   font-size: 3.75em;
   line-height: 1.05em;
   width: 1.75em;
@@ -604,7 +625,7 @@ input[type="text"] {
 
 .searchButton {
   background-color: transparent;
-  border: 4px #94154b solid;
+  border: 4px var(--brand) solid;
   height: 1.7em;
   cursor: pointer;
   padding-left: 0.3em;
@@ -615,7 +636,7 @@ input[type="text"] {
 
 .searchButton:hover {
   color: white;
-  background-color: #94154b;
+  background-color: var(--brand);
   transition: 0.3s;
 }
 
@@ -628,7 +649,7 @@ input[type="text"] {
   font-weight: 100;
   font-size: 2em;
   padding: 120px 0px 90px 0;
-  color: #94154b;
+  color: var(--brand);
   font-family: "Abhaya Libre", serif;
   max-width: 20em;
   display: block;
@@ -642,8 +663,7 @@ input[type="text"] {
 /* form */
 
 .filter-btn {
-  background-color: #dedada;
-  border-radius: 15px;
+  
   border: none;
   padding: 10px;
   height: auto;
@@ -654,12 +674,12 @@ input[type="text"] {
   font-size: 0.9em;
   cursor: pointer;
   margin-bottom: 15px;
+    border: 2px solid var(--brand);
 }
 
 .filter-btn:focus {
   outline: none;
-  border-radius: 15px;
-  border: 2px solid dodgerblue;
+  border: 2px solid var(--brand);
   transition: 0.3s;
 }
 
@@ -671,13 +691,13 @@ input[type="text"] {
 
 .filter-btn:hover,
 .filter-btn:focus {
-  background: #94154b;
+  background: var(--brand);
   color: white;
   transition: 0.3s;
 }
 
 .filterBtnPressed {
-  background: #94154b;
+  background: var(--brand);
   color: white;
 }
 
@@ -685,7 +705,7 @@ input[type="text"] {
   display: block;
   margin: 0 auto;
   font-size: 7em;
-  color: #94154b;
+  color: var(--brand);
   margin-top: -112px;
   padding: 30px;
 }
@@ -737,7 +757,7 @@ input[type="text"] {
     width: calc(100% - 10px);
   }
   .inside-rating {
-    background-color: #94154b;
+    background-color: var(--brand);
     padding: 6px;
     color: white;
   }

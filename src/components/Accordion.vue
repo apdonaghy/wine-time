@@ -2,8 +2,10 @@
   <div>
     <form :ref="wineNames.wineTitle">
       <div class="container">
-        <h3>{{ wineNames.wineTitle }}</h3>
-        <span class="toggle" @click="toggle">v</span>
+        <div class="flexSection">
+        <h3 class="formTitles">{{ wineNames.wineTitle }}</h3>
+        <img class="toggle arrow2" @click="toggle" src="../assets/arrow2.svg" />
+        </div>
         <div
           class="open"
           v-bind:style="{ maxHeight: computedHeight }"
@@ -66,10 +68,29 @@ export default {
 </script>
 
 <style scoped>
+
+.arrow2{
+  width:1em;
+   padding-bottom:20px;
+}
+
+.flexSection{
+  display:flex;
+}
+
+.formTitles{
+  font-family: var(--serif);
+  margin-right:5px;
+  padding-bottom:20px;
+  color:var(--brand);
+  font-size:1.25em;
+}
+
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
   position: absolute;
   left: -9999px;
+ 
 }
 [type="radio"]:checked + label,
 [type="radio"]:not(:checked) + label {
@@ -78,8 +99,14 @@ export default {
   cursor: pointer;
   line-height: 20px;
   display: inline-block;
-  color: #666;
+  font-family:var(--sansSerif);
+  margin-bottom:10px;
 }
+
+label:hover {
+  color:var(--brand)
+}
+
 [type="radio"]:checked + label:before,
 [type="radio"]:not(:checked) + label:before {
   content: "";
@@ -97,18 +124,20 @@ export default {
   content: "";
   width: 12px;
   height: 12px;
-  background: #f87da9;
+  background: var(--brand);
   position: absolute;
   top: 4px;
   left: 4px;
   border-radius: 100%;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+
 }
 [type="radio"]:not(:checked) + label:after {
   opacity: 0;
   -webkit-transform: scale(0);
   transform: scale(0);
+   
 }
 [type="radio"]:checked + label:after {
   opacity: 1;
@@ -126,6 +155,6 @@ export default {
 }
 
 .container {
-  border-bottom: 2px solid;
+  border-bottom: solid 1px rgba(0,0,0,0.1);
 }
 </style>

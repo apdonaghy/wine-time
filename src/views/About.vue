@@ -18,11 +18,11 @@
 /* styling for this specific view */
 
 h2{
-  color:#94154b;
+  color:var(--brand);
   font-family: "Abhaya Libre", serif;
   font-size:2rem;
   font-weight:400;
-  border-bottom:5px solid #94154b;
+  border-bottom:5px solid var(--brand);
   margin-bottom:6%;
 }
 
@@ -35,13 +35,13 @@ h2{
   text-decoration: none;
   font-size: 2rem;
   line-height: 1.3em;
-  color: #94154b;
+  color: var(--brand);
   padding: 12% 10px 5% 10px;
   margin: auto;
   max-width: 1460px;
 }
 a{
-  color: #94154b;
+  color: var(--brand);
 }
 
 a:hover {

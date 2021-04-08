@@ -132,7 +132,7 @@ export default {
 /* Global Styles */
 
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap");
 
 @font-face {
   font-family: "narrow";
@@ -147,6 +147,9 @@ export default {
 :root {
   --narrow: "narrow";
   --narrowMedium: "narrowMedium";
+  --brand: #8900dc;
+  --serif:'Abhaya Libre';
+  --sansSerif: 'Work Sans';
 }
 
 .separate {
@@ -215,7 +218,7 @@ export default {
   font-family: "Abhaya Libre", serif;
   text-decoration: none;
   font-size: 1.5em;
-  color: #94154b;
+  color: var(--brand);
 }
 
 .about a:hover {
