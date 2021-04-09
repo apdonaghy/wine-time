@@ -56,7 +56,7 @@ export default {
       } else {
         this.maxHeight = "0px";
         this.active = false;
-        this.$refs.arrow.style.transform = 'rotate(360deg)'
+        this.$refs.arrow.style.transform = 'rotate(0deg)'
       }
     },
     clear(){

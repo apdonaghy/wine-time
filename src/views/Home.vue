@@ -7,9 +7,11 @@
         <span class="higherText">Added to collection</span>
       </div>
     </transition>
+    
+    <div class="gray">
 
-    <div class="lower">
-      <form v-on:submit.prevent="findWine" class="container">
+    <div class="lower flexMain">
+      <!-- <form v-on:submit.prevent="findWine" class="container">
         <p class="ab-test">
           Select a wine and your max-price per bottle, then search to see a list
           of recommended wines
@@ -83,132 +85,135 @@
             SEARCH
           </button>
         </div>
-      </form>
+      </form> -->
 
       <section class="filter container">
-      <h3 class="filterMainTitle">Filters</h3>
-      <Accordion
-        class="accMargin"
-        ref="red"
-        v-on:checkedData="onChildClick"
-        v-bind:wineNames="reds"
-      ></Accordion>
-      <Accordion
-        class="accMargin"
-        ref="white"
-        v-on:checkedData="onChildClick"
-        v-bind:wineNames="white"
-      ></Accordion>
-      <Accordion
-        class="accMargin"
-        ref="sparkling"
-        v-on:checkedData="onChildClick"
-        v-bind:wineNames="sparkling"
-      ></Accordion>
+        <h3 class="filterMainTitle">Filters</h3>
+        <Accordion
+          class="accMargin"
+          ref="red"
+          v-on:checkedData="onChildClick"
+          v-bind:wineNames="reds"
+        ></Accordion>
+        <Accordion
+          class="accMargin"
+          ref="white"
+          v-on:checkedData="onChildClick"
+          v-bind:wineNames="white"
+        ></Accordion>
+        <Accordion
+          class="accMargin"
+          ref="sparkling"
+          v-on:checkedData="onChildClick"
+          v-bind:wineNames="sparkling"
+        ></Accordion>
       </section>
 
       <!-- font awesome spinner -->
-      <font-awesome-icon
+      <!-- <font-awesome-icon
         v-show="spin"
         class="fa-spin spinner"
         icon="circle-notch"
-      />
-      <div v-if="results && results.length > 0" class="rule"></div>
-    </div>
-    <!-- container for formatted api response -->
-    <main class="wines-container">
-      <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
-      <ul v-if="results && results.length > 0">
-        <div class="container">
-          <p class="filter-text">FILTER</p>
-          <button
-            :class="{ filterBtnPressed: filter1 }"
-            class="filter-btn"
-            @click="high"
-            @keyup.tab="high"
+      /> -->
+
+      <!-- container for formatted api response -->
+      <main class="wines-container">
+        <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
+        <ul v-if="results && results.length > 0">
+          <!-- <div class="container">
+            <p class="filter-text">FILTER</p>
+            <button
+              :class="{ filterBtnPressed: filter1 }"
+              class="filter-btn"
+              @click="high"
+              @keyup.tab="high"
+            >
+              $ high to low
+            </button>
+            <button
+              :class="{ filterBtnPressed: filter2 }"
+              class="filter-btn"
+              @click="low"
+              @keyup.tab="low"
+            >
+              $ low to high
+            </button>
+            <button
+              :class="{ filterBtnPressed: filter3 }"
+              class="filter-btn"
+              @click="highestRatings"
+              @keyup.tab="highestRatings"
+            >
+              Highest Rated
+            </button>
+            <button
+              :class="{ filterBtnPressed: filter4 }"
+              class="filter-btn"
+              @click="mostRatings"
+              @keyup.tab="mostRatings"
+            >
+              Rating Count
+            </button>
+          </div> -->
+
+          <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
+          <li
+            v-for="item of results"
+            class="wine-container container"
+            :key="item.id"
           >
-            $ high to low
-          </button>
-          <button
-            :class="{ filterBtnPressed: filter2 }"
-            class="filter-btn"
-            @click="low"
-            @keyup.tab="low"
-          >
-            $ low to high
-          </button>
-          <button
-            :class="{ filterBtnPressed: filter3 }"
-            class="filter-btn"
-            @click="highestRatings"
-            @keyup.tab="highestRatings"
-          >
-            Highest Rated
-          </button>
-          <button
-            :class="{ filterBtnPressed: filter4 }"
-            class="filter-btn"
-            @click="mostRatings"
-            @keyup.tab="mostRatings"
-          >
-            Rating Count
-          </button>
+            <div class="flex-container">
+              <div class="twentyFive">
+                <img class="img" :src="item.imageUrl" :alt="item.title" />
+              </div>
+              <div class="seventyFive">
+                <h2>
+                  {{ item.title }}
+                </h2>
+                <span class="price flex">
+                  ${{ item.price }} |
+                  <a class="purchase" target="_blank" :href="item.link"
+                    >PURCHASE</a
+                  >
+                  |
+                  <div @click="showAddNotice" class="inline">
+                    <span
+                      @click="$emit('saveWine', item)"
+                      class="collection_btn"
+                      >Add to collection +</span
+                    >
+                  </div>
+                </span>
+                <span class="rating">
+                  Rating
+                  <span class="inside-rating"
+                    >{{ Math.floor(item.averageRating * 100) }}%</span
+                  >
+                </span>
+                <span class="ratings">
+                  Ratings
+                  <strong>x {{ Math.floor(item.ratingCount) }}</strong>
+                </span>
+
+                <p>{{ item.description }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <!-- If the API doesn't return result from a properly filled out form -->
+        <div v-else-if="results && results.length == 0" class="no-results">
+          <h2>No Wines Found</h2>
+          <p>Please adjust your search</p>
         </div>
 
-        <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
-        <li
-          v-for="item of results"
-          class="wine-container container"
-          :key="item.id"
-        >
-          <div class="flex-container">
-            <div class="twentyFive">
-              <img class="img" :src="item.imageUrl" :alt="item.title" />
-            </div>
-            <div class="seventyFive">
-              <h2>
-               {{ item.title }}
-              </h2>
-              <span class="price flex">
-                ${{ item.price }} |
-                <a class="purchase" target="_blank" :href="item.link"
-                  >PURCHASE</a
-                >
-                |
-                <div @click="showAddNotice" class="inline">
-                  <span @click="$emit('saveWine', item)" class="collection_btn"
-                    >Add to collection +</span
-                  >
-                </div>
-              </span>
-              <span class="rating">
-                Rating
-                <span class="inside-rating"
-                  >{{ Math.floor(item.averageRating * 100) }}%</span
-                >
-              </span>
-              <span class="ratings">
-                Ratings
-                <strong>x {{ Math.floor(item.ratingCount) }}</strong>
-              </span>
-
-              <p>{{ item.description }}</p>
-            </div>
-          </div>
-        </li>
-      </ul>
-
-      <!-- If the API doesn't return result from a properly filled out form -->
-      <div v-else-if="results && results.length == 0" class="no-results">
-        <h2>No Wines Found</h2>
-        <p>Please adjust your search</p>
-      </div>
-
-      <!-- If the API can't return data because the form was filled out improperly -->
-      <ul v-if="errors && errors.length > 0" class="errors">
-        <li v-for="error of errors" :key="error">{{ error.message }}</li>
-      </ul>
-    </main>
+        <!-- If the API can't return data because the form was filled out improperly -->
+        <ul v-if="errors && errors.length > 0" class="errors">
+          <li v-for="error of errors" :key="error">{{ error.message }}</li>
+        </ul>
+      </main>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -356,23 +361,25 @@ export default {
 .flex {
   display: flex;
   align-items: center;
+ 
 }
 
-.filter{
-  width:20%;
+.flexMain{
+  display:flex;
+   width:90%;
+  margin:0 auto;
+  padding-top:100px;
 }
 
-.filterMainTitle{
+.filterMainTitle {
   font-family: var(--sansSerif);
-  font-size:1.25em;
-  margin-bottom:20px;
-   border-bottom: solid 1px rgba(0,0,0,0.1);
-   padding-bottom:10px;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  font-weight: 200;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
 }
 
-.accMargin{
-  margin-bottom:20px;
-}
 .collection_btn {
   border: none;
   /* background-color:#94154b; */
@@ -401,21 +408,31 @@ a.purchase:hover {
   color: black;
 }
 
-.margin-bottom {
+/* .margin-bottom {
   margin-bottom: 80px;
+} */
+
+.filter {
+  width: 20%;
+  margin-top:10px;
+} 
+
+.accMargin {
+  margin-bottom: 20px;
 }
 
+
 .wines-container {
-  background-color: #f3f3f3;
+  width: 80%;
   padding: 0px 30px 0px 30px;
 }
 
 .wine-container {
   background-color: white;
   padding: 20px 40px 20px 0px;
-  margin-top: 15px;
+  
   margin-bottom: 30px;
-  box-shadow: 0px 0px 5px lightgrey;
+  box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.05);
 }
 
 ul {
@@ -440,9 +457,14 @@ ul {
   opacity: 0;
 }
 
+.gray{
+    background-color: #f7f7f7;
+}
+
 .lower {
   position: relative;
   z-index: 0;
+  
 }
 
 .higher {
@@ -475,7 +497,7 @@ ul {
 p {
   font-family: var(--sansSerif);
   font-weight: 400;
-  font-size: 1.25em;
+  font-size: 1em;
   line-height: 1.5em;
 }
 
@@ -542,8 +564,8 @@ p {
 }
 
 h2 {
-  font-family: "Abhaya Libre", serif; 
-  font-size: 3em;
+  font-family: "Abhaya Libre", serif;
+  font-size: 2.4em;
   font-weight: 900;
 }
 
@@ -663,7 +685,6 @@ input[type="text"] {
 /* form */
 
 .filter-btn {
-  
   border: none;
   padding: 10px;
   height: auto;
@@ -674,7 +695,7 @@ input[type="text"] {
   font-size: 0.9em;
   cursor: pointer;
   margin-bottom: 15px;
-    border: 2px solid var(--brand);
+  border: 2px solid var(--brand);
 }
 
 .filter-btn:focus {
