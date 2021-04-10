@@ -109,17 +109,19 @@
         ></Accordion>
       </section>
 
-      <!-- font awesome spinner -->
-      <!-- <font-awesome-icon
-        v-show="spin"
-        class="fa-spin spinner"
-        icon="circle-notch"
-      /> -->
+  
 
       <!-- container for formatted api response -->
       <main class="wines-container">
+
+      
+      <font-awesome-icon
+        v-show="spin"
+        class="fa-spin spinner"
+        icon="circle-notch"
+    />
         <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
-        <ul v-if="results && results.length > 0">
+        <ul v-if="results && results.length && !spin> 0">
           <!-- <div class="container">
             <p class="filter-text">FILTER</p>
             <button
@@ -369,6 +371,7 @@ export default {
    width:90%;
   margin:0 auto;
   padding-top:100px;
+  align-content: space-between;
 }
 
 .filterMainTitle {
@@ -423,14 +426,15 @@ a.purchase:hover {
 
 
 .wines-container {
-  width: 80%;
-  padding: 0px 30px 0px 30px;
+  width: 75%;
+  margin-left:20px;
+  
+  /* padding: 0px 30px 0px 30px; */
 }
 
 .wine-container {
   background-color: white;
   padding: 20px 40px 20px 0px;
-  
   margin-bottom: 30px;
   box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.05);
 }
@@ -464,7 +468,6 @@ ul {
 .lower {
   position: relative;
   z-index: 0;
-  
 }
 
 .higher {
@@ -727,8 +730,10 @@ input[type="text"] {
   margin: 0 auto;
   font-size: 7em;
   color: var(--brand);
-  margin-top: -112px;
-  padding: 30px;
+   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* responsive styles */

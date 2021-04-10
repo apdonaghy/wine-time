@@ -64,6 +64,7 @@ export default {
     if (this.$ls.get("savedWines")) {
       this.favorites = this.$ls.get("savedWines");
     }
+    this.apiCall({wine: 'Merlot'})
   },
   methods: {
     resize() {
@@ -152,6 +153,7 @@ export default {
   --sansSerif: 'Work Sans';
 }
 
+
 .separate {
   font-size: 1.4em;
   margin: 0 5px 0 5px;
@@ -160,6 +162,10 @@ export default {
 .container {
   max-width: 1460px;
   margin: 0 auto;
+}
+
+body{
+  background-color: #f7f7f7;
 }
 
 ::selection {
@@ -195,10 +201,10 @@ export default {
   flex-wrap: nowrap;
   /* justify-content: center; */
   align-items: center;
-  max-width: 1460px;
+  width:90%;
   margin: 0 auto;
   justify-content: space-between;
-  padding: 7px 20px 2px 20px;
+  padding: 7px 0px 2px 0px;
 }
 
 @media screen and (max-width: 900px) {
