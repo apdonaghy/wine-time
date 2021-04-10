@@ -232,7 +232,7 @@ export default {
     return {
       addedNotice: false,
       wine: "",
-      maxPrice: 0,
+      maxPrice: 150,
       currentList: null,
       filter1: false,
       filter2: false,
@@ -444,7 +444,9 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .priceTitle{
-  font-family: var(--sansSerif);
+  font-family: var(--serif);
+  font-size: 1.5em;
+  font-weight:200;
 }
 
    
