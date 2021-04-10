@@ -7,11 +7,10 @@
         <span class="higherText">Added to collection</span>
       </div>
     </transition>
-    
-    <div class="gray">
 
-    <div class="lower flexMain">
-      <!-- <form v-on:submit.prevent="findWine" class="container">
+    <div class="gray">
+      <div class="lower flexMain">
+        <!-- <form v-on:submit.prevent="findWine" class="container">
         <p class="ab-test">
           Select a wine and your max-price per bottle, then search to see a list
           of recommended wines
@@ -87,42 +86,43 @@
         </div>
       </form> -->
 
-      <section class="filter container">
-        <h3 class="filterMainTitle">Filters</h3>
-        <Accordion
-          class="accMargin"
-          ref="red"
-          v-on:checkedData="onChildClick"
-          v-bind:wineNames="reds"
-        ></Accordion>
-        <Accordion
-          class="accMargin"
-          ref="white"
-          v-on:checkedData="onChildClick"
-          v-bind:wineNames="white"
-        ></Accordion>
-        <Accordion
-          class="accMargin"
-          ref="sparkling"
-          v-on:checkedData="onChildClick"
-          v-bind:wineNames="sparkling"
-        ></Accordion>
-      </section>
+        <section class="filter">
+          <h3 class="filterMainTitle">Filters</h3>
+          <Accordion
+            class="accMargin"
+            ref="red"
+            v-on:checkedData="onChildClick"
+            v-bind:wineNames="reds"
+          ></Accordion>
+          <Accordion
+            class="accMargin"
+            ref="white"
+            v-on:checkedData="onChildClick"
+            v-bind:wineNames="white"
+          ></Accordion>
+          <Accordion
+            class="accMargin"
+            ref="sparkling"
+            v-on:checkedData="onChildClick"
+            v-bind:wineNames="sparkling"
+          ></Accordion>
 
-  
+          <div class="control">
+            <h4 class="priceTitle">${{maxPrice}}</h4>
+            <input type="range" min="0" max="300" v-model="maxPrice" />
+          </div>
+        </section>
 
-      <!-- container for formatted api response -->
-      <main class="wines-container">
-
-      
-      <font-awesome-icon
-        v-show="spin"
-        class="fa-spin spinner"
-        icon="circle-notch"
-    />
-        <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
-        <ul v-if="results && results.length && !spin> 0">
-          <!-- <div class="container">
+        <!-- container for formatted api response -->
+        <main class="wines-container">
+          <font-awesome-icon
+            v-show="spin"
+            class="fa-spin spinner"
+            icon="circle-notch"
+          />
+          <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
+          <ul v-if="results && results.length && !spin > 0">
+            <!-- <div class="container">
             <p class="filter-text">FILTER</p>
             <button
               :class="{ filterBtnPressed: filter1 }"
@@ -158,64 +158,64 @@
             </button>
           </div> -->
 
-          <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
-          <li
-            v-for="item of results"
-            class="wine-container container"
-            :key="item.id"
-          >
-            <div class="flex-container">
-              <div class="twentyFive">
-                <img class="img" :src="item.imageUrl" :alt="item.title" />
-              </div>
-              <div class="seventyFive">
-                <h2>
-                  {{ item.title }}
-                </h2>
-                <span class="price flex">
-                  ${{ item.price }} |
-                  <a class="purchase" target="_blank" :href="item.link"
-                    >PURCHASE</a
-                  >
-                  |
-                  <div @click="showAddNotice" class="inline">
-                    <span
-                      @click="$emit('saveWine', item)"
-                      class="collection_btn"
-                      >Add to collection +</span
+            <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
+            <li
+              v-for="item of results"
+              class="wine-container container"
+              :key="item.id"
+            >
+              <div class="flex-container">
+                <div class="twentyFive">
+                  <img class="img" :src="item.imageUrl" :alt="item.title" />
+                </div>
+                <div class="seventyFive">
+                  <h2>
+                    {{ item.title }}
+                  </h2>
+                  <span class="price flex">
+                    ${{ item.price }} |
+                    <a class="purchase" target="_blank" :href="item.link"
+                      >PURCHASE</a
                     >
-                  </div>
-                </span>
-                <span class="rating">
-                  Rating
-                  <span class="inside-rating"
-                    >{{ Math.floor(item.averageRating * 100) }}%</span
-                  >
-                </span>
-                <span class="ratings">
-                  Ratings
-                  <strong>x {{ Math.floor(item.ratingCount) }}</strong>
-                </span>
+                    |
+                    <div @click="showAddNotice" class="inline">
+                      <span
+                        @click="$emit('saveWine', item)"
+                        class="collection_btn"
+                        >Add to collection +</span
+                      >
+                    </div>
+                  </span>
+                  <span class="rating">
+                    Rating
+                    <span class="inside-rating"
+                      >{{ Math.floor(item.averageRating * 100) }}%</span
+                    >
+                  </span>
+                  <span class="ratings">
+                    Ratings
+                    <strong>x {{ Math.floor(item.ratingCount) }}</strong>
+                  </span>
 
-                <p>{{ item.description }}</p>
+                  <p>{{ item.description }}</p>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
 
-        <!-- If the API doesn't return result from a properly filled out form -->
-        <div v-else-if="results && results.length == 0" class="no-results">
-          <h2>No Wines Found</h2>
-          <p>Please adjust your search</p>
-        </div>
+          <!-- If the API doesn't return result from a properly filled out form -->
+          <div v-else-if="results && results.length == 0" class="no-results">
+            <h2>No Wines Found</h2>
+            <p>Please adjust your search</p>
+          </div>
 
-        <!-- If the API can't return data because the form was filled out improperly -->
-        <ul v-if="errors && errors.length > 0" class="errors">
-          <li v-for="error of errors" :key="error">{{ error.message }}</li>
-        </ul>
-      </main>
+          <!-- If the API can't return data because the form was filled out improperly -->
+          <ul v-if="errors && errors.length > 0" class="errors">
+            <li v-for="error of errors" :key="error">{{ error.message }}</li>
+          </ul>
+        </main>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -232,7 +232,7 @@ export default {
     return {
       addedNotice: false,
       wine: "",
-      maxPrice: "",
+      maxPrice: 0,
       currentList: null,
       filter1: false,
       filter2: false,
@@ -355,6 +355,99 @@ export default {
 <style scoped>
 /* styling for this specific view */
 
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: lightgray;
+  border-radius: 25px;
+  border: 0px solid #000101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--brand);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.6px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: lightgray;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: lightgray;
+  border-radius: 25px;
+  border: 0px solid #000101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 39px;
+  border-radius: 7px;
+  background: black;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 39px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: lightgray;
+  border: 0px solid #000101;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: lightgray;
+  border: 0px solid #000101;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 39px;
+  border-radius: 7px;
+  background: #65001c;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: lightgray;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: lightgray;
+}
+
+.priceTitle{
+  font-family: var(--sansSerif);
+}
+
+   
 .redBackground {
   background-color: var(--brand);
   height: 100vh;
@@ -363,14 +456,13 @@ export default {
 .flex {
   display: flex;
   align-items: center;
- 
 }
 
-.flexMain{
-  display:flex;
-   width:90%;
-  margin:0 auto;
-  padding-top:100px;
+.flexMain {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 100px;
   align-content: space-between;
 }
 
@@ -416,19 +508,18 @@ a.purchase:hover {
 } */
 
 .filter {
-  width: 20%;
-  margin-top:10px;
-} 
+  width: 25%;
+  margin-top: 10px;
+}
 
 .accMargin {
   margin-bottom: 20px;
 }
 
-
 .wines-container {
   width: 75%;
-  margin-left:20px;
-  
+  margin-left: 20px;
+
   /* padding: 0px 30px 0px 30px; */
 }
 
@@ -461,8 +552,8 @@ ul {
   opacity: 0;
 }
 
-.gray{
-    background-color: #f7f7f7;
+.gray {
+  background-color: #f7f7f7;
 }
 
 .lower {
@@ -474,11 +565,9 @@ ul {
   width: 12em;
   height: 2em;
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
   z-index: 2;
   font-family: var(--serif);
   font-size: 2em;
@@ -730,7 +819,7 @@ input[type="text"] {
   margin: 0 auto;
   font-size: 7em;
   color: var(--brand);
-   position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

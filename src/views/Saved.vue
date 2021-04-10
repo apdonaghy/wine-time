@@ -5,9 +5,14 @@
     <h2>Wine Collection</h2>
     <span v-if="favorites.length === 0" class="wineCollectionNote">Use the <strong>add to collection</strong> button next to each wine to build a list of your favorite wines.</span>
     <ol v-if="favorites.length > 0">
-      <li v-for="(wine, index) of favorites" :key="index">
-        <a :href="wine.link" target="_blank">{{wine.title}}</a> <font-awesome-icon class="exit" @click="$emit('removeWine', wine)" icon="times" />
+      <div  v-for="(wine, index) of favorites" :key="index" class="space">
+      <li>
+           
+        <a :href="wine.link" target="_blank">{{wine.title}}</a> 
+
       </li>
+      <font-awesome-icon class="exit" @click="$emit('removeWine', wine)" icon="times" />
+      </div>
     </ol>
     </div>
   </div>
@@ -28,11 +33,15 @@ export default {
 
 <style scoped>
 
-
+.space{
+  display:flex;
+  align-content: space-between;
+}
 
 .exit{
   padding-top: 12px;
   cursor: pointer;
+    margin-left: auto;
 }
 
 .exit:hover{
