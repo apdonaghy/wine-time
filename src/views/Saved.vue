@@ -34,12 +34,14 @@ export default {
 <style scoped>
 
 .space{
+  margin-top:30px;
   display:flex;
   align-content: space-between;
+  border-bottom:2px solid transparent;
 }
 
 .exit{
-  padding-top: 12px;
+
   cursor: pointer;
     margin-left: auto;
 }
@@ -64,10 +66,12 @@ ol{
  
 }
 
+
+
 a{
   text-decoration: none;
   color:black;
-  text-decoration: underline;
+
    
 }
 
@@ -76,7 +80,7 @@ a:hover{
 }
 
 li{
-    padding-bottom:25px;
+  
     font-weight:100;
 }
 
@@ -144,7 +148,7 @@ ol:last-child{
 }
 
 .exit{
-  padding-top: 6px;
+
   cursor: pointer;
 }
 }
@@ -162,6 +166,10 @@ ol:last-child{
  font-family: "Abhaya Libre", serif;
   color:gray;
   font-size: 1.5em;
+}
+
+.space:hover{
+  border-bottom:2px solid var(--brand);
 }
 
 </style>

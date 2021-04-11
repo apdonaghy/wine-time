@@ -10,81 +10,7 @@
 
     <div class="gray">
       <div class="lower flexMain">
-        <!-- <form v-on:submit.prevent="findWine" class="container">
-        <p class="ab-test">
-          Select a wine and your max-price per bottle, then search to see a list
-          of recommended wines
-        </p>
-        <div class="flex-container margin-bottom">
-          <div>
-            <label for="redWine" class="form-labels">
-              RED
-              <i class="fas fa-angle-down"></i>
-            </label>
-            <select
-              v-model="wine"
-              name="redWine"
-              id="redWine"
-              class="select-css"
-            >
-              <option value="cabernet sauvignon">Cabernet Sauvignon</option>
-              <option value="merlot">Merlot</option>
-              <option value="pinot noir">Pinot Noir</option>
-              <option value="syrah">Syrah</option>
-              <option value="malbec">Malbec</option>
-              <option value="zinfandel">Zinfandel</option>
-            </select>
-          </div>
-          <div>
-            <label for="whiteWine" class="form-labels">WHITE</label>
-            <select
-              v-model="wine"
-              name="whiteWine"
-              id="whiteWine"
-              class="select-css"
-            >
-              <option value="pinot grigio">Pinot Grigio</option>
-              <option value="chardonnay">Chardonnay</option>
-              <option value="sauvignon blanc">Sauvignon blanc</option>
-              <option value="pinot gris">Pinot Gris</option>
-            </select>
-          </div>
-          <div>
-            <label for="sparklingWine" class="form-labels">SPARKLING</label>
-            <select
-              v-model="wine"
-              name="sparklingWine"
-              id="sparklingWine"
-              class="select-css"
-            >
-              <option value="champagne">Champagne</option>
-              <option value="cava">Cava</option>
-              <option value="prosecco">Prosecco</option>
-              <option value="sparkling wine">Sparkling Wine</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="flex-container3 margin-bottom">
-          <div>
-            <label for="max-price" class="form-labels">
-              MAX PRICE
-              <strong class="fiveHundred">$</strong>
-            </label>
-            <input
-              autocomplete="off"
-              id="max-price"
-              name="max-price"
-              type="text"
-              v-model="maxPrice"
-            />
-          </div>
-          <button type="submit" class="form-labels searchWord searchButton">
-            <font-awesome-icon class="search-icon" icon="search" />
-            SEARCH
-          </button>
-        </div>
-      </form> -->
 
         <section class="filter">
           <h3 class="filterMainTitle">Filters</h3>
@@ -108,8 +34,42 @@
           ></Accordion>
 
           <div class="control">
-            <h4 class="priceTitle">${{maxPrice}}</h4>
-            <input type="range" min="0" max="300" v-model="maxPrice" />
+            <h4 class="priceTitle"><span>Max Price</span> ${{maxPrice}}</h4>
+            <input type="range" min="0" max="125" v-model="maxPrice" />
+          </div>
+            <div class="btnContainer">
+            <button
+              :class="{ filterBtnPressed: filters.filter1 }"
+              class="filter-btn"
+              @click="high"
+              @keyup.tab="high"
+            >
+              $ high to low
+            </button>
+            <button
+              :class="{ filterBtnPressed: filters.filter2 }"
+              class="filter-btn"
+              @click="low"
+              @keyup.tab="low"
+            >
+              $ low to high
+            </button>
+            <button
+              :class="{ filterBtnPressed: filters.filter3 }"
+              class="filter-btn"
+              @click="highestRatings"
+              @keyup.tab="highestRatings"
+            >
+              Highest Rated
+            </button>
+            <button
+              :class="{ filterBtnPressed: filters.filter4 }"
+              class="filter-btn"
+              @click="mostRatings"
+              @keyup.tab="mostRatings"
+            >
+              Rating Count
+            </button>
           </div>
         </section>
 
@@ -122,45 +82,11 @@
           />
           <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
           <ul v-if="results && results.length && !spin > 0">
-            <!-- <div class="container">
-            <p class="filter-text">FILTER</p>
-            <button
-              :class="{ filterBtnPressed: filter1 }"
-              class="filter-btn"
-              @click="high"
-              @keyup.tab="high"
-            >
-              $ high to low
-            </button>
-            <button
-              :class="{ filterBtnPressed: filter2 }"
-              class="filter-btn"
-              @click="low"
-              @keyup.tab="low"
-            >
-              $ low to high
-            </button>
-            <button
-              :class="{ filterBtnPressed: filter3 }"
-              class="filter-btn"
-              @click="highestRatings"
-              @keyup.tab="highestRatings"
-            >
-              Highest Rated
-            </button>
-            <button
-              :class="{ filterBtnPressed: filter4 }"
-              class="filter-btn"
-              @click="mostRatings"
-              @keyup.tab="mostRatings"
-            >
-              Rating Count
-            </button>
-          </div> -->
+          
 
             <!-- v-for loops through the results array and injects the oject of each index into the DOM-->
             <li
-              v-for="item of results"
+              v-for="item of filteredWines"
               class="wine-container container"
               :key="item.id"
             >
@@ -232,12 +158,14 @@ export default {
     return {
       addedNotice: false,
       wine: "",
-      maxPrice: 150,
+      maxPrice: 25,
       currentList: null,
+      filters:{
       filter1: false,
       filter2: false,
       filter3: false,
-      filter4: false,
+      filter4: false
+      },
       spinning: true,
       reds: {
         wineTitle: "Red",
@@ -260,19 +188,17 @@ export default {
       },
     };
   },
+    computed:{
+      filteredWines: function() {
+      return this.results
+        .filter(result => {
+          return result.price < this.maxPrice;
+        })
+        
+
+    }
+  },
   methods: {
-    findWine: function () {
-      this.$emit("apiCall", {
-        maxPrice: this.maxPrice,
-        wine: this.wine,
-        spinning: this.spinning,
-      }),
-        (this.filter1 = false);
-      this.filter2 = false;
-      this.filter3 = false;
-      this.filter4 = false;
-      //shows spinner during API request
-    },
     resetForm: function (event) {
       console.log(event.target);
     },
@@ -280,17 +206,7 @@ export default {
       this.addedNotice = true;
       setTimeout(() => (this.addedNotice = false), 500);
     },
-    // google analytics click event goal
-    // code for filters
-    high() {
-      this.filter1 = true;
-      this.filter2 = false;
-      this.filter3 = false;
-      this.filter4 = false;
-      return this.results.sort(function (a, b) {
-        return b.price - a.price;
-      });
-    },
+
     onChildClick(value) {
       this.wine = value.inputVal;
       this.currentList = value.currentTitle;
@@ -310,31 +226,62 @@ export default {
         wine: this.wine,
         spinning: this.spinning,
       });
-      //  console.log(this.$refs.red)
+
+      let thisFilter;
+        for(let oneFilter in this.filters){
+         if(this.filters[oneFilter] === true){
+            thisFilter = oneFilter
+         }
+        }
+        console.log(thisFilter)
+  
+        // if(thisFilter === this.filters.filter1){
+        //   this.high()
+        // }
+        // if(thisFilter === this.filters.filter2){
+        //   this.low()
+        // }
+
+        // if(thisFilter === this.filters.filter3){
+        //   this.highestRatings()
+        // }
+        //  if(thisFilter === this.filters.filter4){
+        //   this.mostRatings()
+        // }
+
+    },
+    filterBtn(filterName){
+        for(let oneFilter in this.filters){
+         if(oneFilter === filterName){
+               this.filters[oneFilter] = true;
+         }else{
+              this.filters[oneFilter] = false;
+         }
+       }
+       console.log(this.filters)
+    },
+    high() {
+   
+      this.filterBtn('filter1')
+
+      return this.results.sort(function (a, b) {
+        return b.price - a.price;
+      });
     },
     low() {
-      this.filter1 = false;
-      this.filter2 = true;
-      this.filter3 = false;
-      this.filter4 = false;
+      this.filterBtn('filter2')
       return this.results.sort(function (a, b) {
         return a.price - b.price;
       });
     },
     highestRatings() {
-      this.filter1 = false;
-      this.filter2 = false;
-      this.filter3 = true;
-      this.filter4 = false;
+      this.filterBtn('filter3')
       return this.results.sort(function (a, b) {
-        return b.averageRating - a.averageRating;
+      return b.averageRating - a.averageRating;
       });
     },
     mostRatings() {
-      this.filter1 = false;
-      this.filter2 = false;
-      this.filter3 = false;
-      this.filter4 = true;
+      this.filterBtn('filter4')
       return this.results.sort(function (a, b) {
         return b.ratingCount - a.ratingCount;
       });
@@ -447,8 +394,15 @@ input[type=range]:focus::-ms-fill-upper {
   font-family: var(--serif);
   font-size: 1.5em;
   font-weight:200;
+  color:var(--brand)
 }
 
+.priceTitle span{
+  font-family: var(--sansSerif);
+  font-size: .7em;
+  font-weight:500;
+  color:black;
+}
    
 .redBackground {
   background-color: var(--brand);
@@ -780,13 +734,13 @@ input[type="text"] {
 
 .filter-btn {
   border: none;
-  padding: 10px;
+  padding: 8px;
   height: auto;
   margin-left: 0px;
   margin-right: 15px;
   font-weight: 400;
-  color: #6a6a6a;
-  font-size: 0.9em;
+  color: var(--brand);
+  font-size: 0.8em;
   cursor: pointer;
   margin-bottom: 15px;
   border: 2px solid var(--brand);
@@ -814,6 +768,9 @@ input[type="text"] {
 .filterBtnPressed {
   background: var(--brand);
   color: white;
+}
+.btnContainer{
+  margin-top:30px;
 }
 
 .spinner {
