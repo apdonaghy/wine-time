@@ -64,15 +64,15 @@ export default {
 }
 
 .overlay {
+
   height: 0%;
   width: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0, 0.9);
-  overflow-x: hidden;
+  background-color: var(--brand);
+  overflow: hidden;
   transition: 0.5s;
 }
 
@@ -88,14 +88,14 @@ export default {
   padding: 8px;
   text-decoration: none;
   font-size: 44px;
-  color: #a9a9a9;
+  color: white;
   display: block;
   transition: 0.3s;
   font-family: "Abhaya Libre", serif;
 }
 
 .overlay a:hover, .overlay a:focus {
-  color: #f1f1f1;
+  color: black;
 }
 
 .overlay .closebtn {
@@ -107,12 +107,12 @@ export default {
 }
 
 span.closebtn{
-  color: #a9a9a9;
+  color: white;
   cursor: pointer;
 }
 
 span.closebtn:hover{
-  color:white;
+  color:black;
 }
 
 @media screen and (max-height: 450px) {

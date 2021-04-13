@@ -11,9 +11,11 @@
     <div class="gray">
       <div class="lower flexMain">
 
-
+  
         <section class="filter">
           <h3 class="filterMainTitle">Filters</h3>
+
+      
           <Accordion
             class="accMargin"
             ref="red"
@@ -43,8 +45,7 @@
               class="filter-btn"
               @click="high"
               @keyup.tab="high"
-            >
-              $ high to low
+            >$ high to low
             </button>
             <button
               :class="{ filterBtnPressed: filters.filter2 }"
@@ -112,12 +113,16 @@
                       >
                     </div>
                   </span>
+                  <div class="flex">
                   <span class="rating">
                     Rating
-                    <span class="inside-rating"
+                
+                  </span>
+                      <span class="inside-rating"
                       >{{ Math.floor(item.averageRating * 100) }}%</span
                     >
-                  </span>
+                  </div>
+                  
                   <span class="ratings">
                     Ratings
                     <strong>x {{ Math.floor(item.ratingCount) }}</strong>
@@ -156,6 +161,7 @@ export default {
   },
   data() {
     return {
+
       addedNotice: false,
       wine: "",
       maxPrice: 25,
@@ -301,6 +307,11 @@ export default {
 
 <style scoped>
 /* styling for this specific view */
+
+button{
+
+background-color:transparent;
+}
 
 input[type=range] {
   -webkit-appearance: none;
@@ -556,7 +567,7 @@ p {
   font-size: 1.15em;
   font-weight: 700;
   color: var(--brand);
-  padding: 5px 0px 5px 5px;
+  padding: 5px 5px 5px 5px;
   margin-top: 5px;
 }
 
@@ -565,10 +576,14 @@ p {
 }
 
 .inside-rating {
+   font-family: var(--sansSerif);
   background-color: var(--brand);
-  padding: 8px 4.5px 8px 8px;
-  color: white;
-  margin: -1px;
+  padding: 5px 5px 5px 5px;
+  margin-top: 5px;
+    font-size: 1.15em;
+  font-weight: 700;
+  color:white;
+  border: 3.5px var(--brand) solid;
 }
 
 .ratings {

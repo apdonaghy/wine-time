@@ -98,10 +98,6 @@ a:hover {
   }
 }
 
-#About{
-  background-color:white;
-  width:100vw;
-  height:100vh;
-}
+
 
 </style>

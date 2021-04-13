@@ -1,6 +1,6 @@
 <template>
 
-  <div id="Saved" class="saved">
+  <div id="saved" class="saved">
     <div class="container wine-list">
     <h2>Wine Collection</h2>
     <span v-if="favorites.length === 0" class="wineCollectionNote">Use the <strong>add to collection</strong> button next to each wine to build a list of your favorite wines.</span>
@@ -44,6 +44,8 @@ export default {
 
   cursor: pointer;
     margin-left: auto;
+    font-size:1em;
+    padding-top:10px;
 }
 
 .exit:hover{
@@ -171,5 +173,6 @@ ol:last-child{
 .space:hover{
   border-bottom:2px solid var(--brand);
 }
+
 
 </style>
