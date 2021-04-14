@@ -14,7 +14,7 @@
   
         <section class="filter">
           <h3 class="filterMainTitle">Filters</h3>
-
+         <h5> Results <span v-if="results && results.length && !spin > 0">{{filteredWines.length}}</span> </h5>
       
           <Accordion
             class="accMargin"
@@ -91,6 +91,9 @@
               class="wine-container container"
               :key="item.id"
             >
+            
+             
+
               <div class="flex-container">
                 <div class="twentyFive">
                   <img class="img" :src="item.imageUrl" :alt="item.title" />
