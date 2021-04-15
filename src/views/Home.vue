@@ -10,12 +10,11 @@
 
     <div class="gray">
       <div class="lower flexMain">
-
-  
         <section class="filter">
+          <div class="flex filterHeaders">
           <h3 class="filterMainTitle">Filters</h3>
-         <h5> Results <span v-if="results && results.length && !spin > 0">{{filteredWines.length}}</span> </h5>
-      
+          <h5> Results <span v-if="results && results.length && !spin > 0">{{filteredWines.length}}</span> </h5>
+          </div>
           <Accordion
             class="accMargin"
             ref="red"
@@ -167,7 +166,7 @@ export default {
 
       addedNotice: false,
       wine: "",
-      maxPrice: 25,
+      maxPrice: 125,
       currentList: null,
       filters:{
       filter1: false,
@@ -315,6 +314,27 @@ button{
 
 background-color:transparent;
 }
+.filterHeaders{
+  justify-content: space-between;
+    border-bottom: solid 1px rgba(0,0,0,0.1);
+  padding-bottom:10px;
+  margin-bottom:20px;
+}
+
+h5{
+  font-size:.9em;
+  font-family: var(--sansSerif);
+  font-weight:600;
+  color:gray;
+}
+
+.filterMainTitle {
+  font-family: var(--sansSerif);
+  font-size: 1.2em;
+  font-weight: 200;
+}
+
+
 
 input[type=range] {
   -webkit-appearance: none;
@@ -394,7 +414,7 @@ input[type=range]::-ms-thumb {
   height: 20px;
   width: 39px;
   border-radius: 7px;
-  background: #65001c;
+  background: var(--brand);
   cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {
@@ -436,14 +456,7 @@ input[type=range]:focus::-ms-fill-upper {
   align-content: space-between;
 }
 
-.filterMainTitle {
-  font-family: var(--sansSerif);
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  font-weight: 200;
-  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
-  padding-bottom: 10px;
-}
+
 
 .collection_btn {
   border: none;
@@ -579,11 +592,11 @@ p {
 }
 
 .inside-rating {
-   font-family: var(--sansSerif);
+  font-family: var(--sansSerif);
   background-color: var(--brand);
   padding: 5px 5px 5px 5px;
   margin-top: 5px;
-    font-size: 1.15em;
+  font-size: 1.15em;
   font-weight: 700;
   color:white;
   border: 3.5px var(--brand) solid;
@@ -848,11 +861,7 @@ input[type="text"] {
   .twentyFive {
     width: calc(100% - 10px);
   }
-  .inside-rating {
-    background-color: var(--brand);
-    padding: 6px;
-    color: white;
-  }
+
   .filter-text {
     display: block;
   }
@@ -874,6 +883,23 @@ input[type="text"] {
     font-size: 2.5em;
   }
 }
+@media screen and (max-width: 730px) {
+  .flexMain{
+    display:block;
+  }
+
+  .filter{
+    width:100%;
+  }
+
+  .wines-container{
+    width:100%;
+    margin-left:0px;
+  }
+
+}
+
+
 
 @media screen and (max-width: 650px) {
   .higher {
