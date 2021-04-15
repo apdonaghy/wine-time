@@ -78,18 +78,31 @@ export default {
       }
     },
     apiCall(payload) {
+
+    this.results = null;
+
+    let cacheLabel = 'wines_' + payload.wine;
+    let cacheExpiry = 30 * 60 * 1000; // 15 minutes
+
+    if (this.$ls.get(cacheLabel)){
+    console.log('Cached query detected.');
+    this.results = this.$ls.get(cacheLabel);
+    this.spin = false;
+    } else {
+    console.log('No cache available. Making API request.');
       axios
         .get("https://api.spoonacular.com/food/wine/recommendation", {
           params: {
             wine: payload.wine, //dynamically adds the user's choice to the API request
             number: 100,
             minRating: 0.8,
-            maxPrice: payload.maxPrice, //dynamically adds the users choice to the API request
             apiKey: "2c010ee91b164e24a2c25a653e110615", //apply for a unique API key at spoonacular.com
           },
         })
         .then((response) => {
           //API response
+           this.$ls.set(cacheLabel, response.data.recommendedWines, cacheExpiry);
+           console.log('New query has been cached as: ' + cacheLabel);
           this.results = this.processData(response.data.recommendedWines);
           this.spin = false;
         })
@@ -97,6 +110,8 @@ export default {
           (this.spin = false), this.errors.push(error);
         });
         this.spin = true;
+
+    }
     },
     processData: function (dataArr) {
       for (let data in dataArr) {
@@ -148,7 +163,7 @@ export default {
 :root {
   --narrow: "narrow";
   --narrowMedium: "narrowMedium";
-  --brand: #8900dc;
+  --brand: #7f12ff;
   --serif:'Abhaya Libre';
   --sansSerif: 'Work Sans';
 }

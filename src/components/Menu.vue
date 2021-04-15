@@ -71,9 +71,9 @@ export default {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: var(--brand);
+  background-color: black;
   overflow: hidden;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 .overlay-content {
@@ -95,7 +95,7 @@ export default {
 }
 
 .overlay a:hover, .overlay a:focus {
-  color: black;
+  color: var(--brand);
 }
 
 .overlay .closebtn {
@@ -112,7 +112,7 @@ span.closebtn{
 }
 
 span.closebtn:hover{
-  color:black;
+  color: var(--brand);
 }
 
 @media screen and (max-height: 450px) {

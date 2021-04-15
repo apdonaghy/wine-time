@@ -163,10 +163,9 @@ export default {
   },
   data() {
     return {
-
       addedNotice: false,
       wine: "",
-      maxPrice: 125,
+      maxPrice: 25,
       currentList: null,
       filters:{
       filter1: false,
@@ -230,7 +229,6 @@ export default {
       }
 
       this.$emit("apiCall", {
-        maxPrice: this.maxPrice,
         wine: this.wine,
         spinning: this.spinning,
       });
@@ -316,7 +314,7 @@ background-color:transparent;
 }
 .filterHeaders{
   justify-content: space-between;
-    border-bottom: solid 1px rgba(0,0,0,0.1);
+  border-bottom: solid 1px rgba(0,0,0,0.1);
   padding-bottom:10px;
   margin-bottom:20px;
 }
@@ -895,6 +893,14 @@ input[type="text"] {
   .wines-container{
     width:100%;
     margin-left:0px;
+  }
+
+  .higher {
+  width: 12em;
+  height: 2em;
+  position: fixed;
+  top: 50%;
+  left:55%;
   }
 
 }
