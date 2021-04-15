@@ -101,9 +101,10 @@ export default {
         })
         .then((response) => {
           //API response
-           this.$ls.set(cacheLabel, response.data.recommendedWines, cacheExpiry);
+      
            console.log('New query has been cached as: ' + cacheLabel);
           this.results = this.processData(response.data.recommendedWines);
+          this.$ls.set(cacheLabel, this.results, cacheExpiry);
           this.spin = false;
         })
         .catch((error) => {
