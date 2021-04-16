@@ -1,6 +1,11 @@
 <template>
   <div id="Home">
     <!-- when form is submitted prevent deafault reload and trigger the findWine mehtod -->
+          <font-awesome-icon
+            v-show="spin"
+            class="fa-spin spinner"
+            icon="circle-notch"
+          />
 
     <transition name="fade" v-if="addedNotice">
       <div class="higher">
@@ -51,8 +56,7 @@
               class="filter-btn"
               @click="low"
               @keyup.tab="low"
-            >
-              $ low to high
+            >$ low to high
             </button>
             <button
               :class="{ filterBtnPressed: filters.filter3 }"
@@ -75,11 +79,7 @@
 
         <!-- container for formatted api response -->
         <main class="wines-container">
-          <font-awesome-icon
-            v-show="spin"
-            class="fa-spin spinner"
-            icon="circle-notch"
-          />
+
           <!-- v-if conditional to display ul contents only if api response is valid and is > than 0 items -->
           <ul v-if="results && results.length && !spin > 0">
           
@@ -332,8 +332,6 @@ h5{
   font-weight: 200;
 }
 
-
-
 input[type=range] {
   -webkit-appearance: none;
   margin: 10px 0;
@@ -453,8 +451,6 @@ input[type=range]:focus::-ms-fill-upper {
   padding-top: 100px;
   align-content: space-between;
 }
-
-
 
 .collection_btn {
   border: none;
@@ -808,9 +804,9 @@ input[type="text"] {
   font-size: 7em;
   color: var(--brand);
   position: absolute;
-  top: 50%;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 }
 
 /* responsive styles */
@@ -913,12 +909,12 @@ input[type="text"] {
   }
 
   .spinner {
-    display: block;
-    margin: 0 auto;
+    /* display: block;
+    margin: 0 auto; */
     font-size: 6em;
-    color: white;
-    margin-top: -96px;
-    padding: 20px;
+
+    /* margin-top: -96px;
+    padding: 20px; */
   }
 
   p {
